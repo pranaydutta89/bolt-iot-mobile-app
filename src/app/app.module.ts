@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -9,6 +9,17 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
+import { DeviceService } from './services/device.service';
+
+// @ts-ignore
+let global = window.globalThis
+global.fetch = window.fetch.bind(window);
+
+export function initializeDevices(deviceService: DeviceService) {
+  return (): Promise<any> => {
+    return deviceService.init();
+  };
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +33,13 @@ import { StorageService } from './services/storage.service';
     StatusBar,
     SplashScreen,
     StorageService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    DeviceService,
+    {
+      provide: RouteReuseStrategy, useClass: IonicRouteStrategy
+    },
+    {
+      provide: APP_INITIALIZER, useFactory: initializeDevices, deps: [DeviceService], multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

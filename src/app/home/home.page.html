@@ -19,12 +19,12 @@
       </ion-card-header>
       <ion-card-content>
         <ion-list>
-          <ion-item>
+          <ion-item [disabled]="motionSensorDisabled">
             <ion-toggle color="dark"></ion-toggle>
             <ion-label>Enabled</ion-label>
           </ion-item>
           <ion-item>
-            <line-chart [data]='chartData'></line-chart>
+            <ion-label>Last Movement</ion-label>
           </ion-item>
         </ion-list>
       </ion-card-content>

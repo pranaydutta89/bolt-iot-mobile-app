@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ILineChartData } from '../interface';
+import { ToastController } from '@ionic/angular';
+import { DeviceService } from '../services/device.service';
+import { Products } from '../enums';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,16 @@ import { ILineChartData } from '../interface';
 })
 export class HomePage {
 
-  chartData: ILineChartData = {
-    xAxis: ['Jan', 'Feb', 'Mar'],
-    yAxis: [1, 2, 3, 4, 5]
-  };
+  private motionSensorDisabled = true;
+  constructor(private DeviceServ: DeviceService) {
+
+    this.checkStatus();
+  }
+
+  async checkStatus() {
+    if (!await this.DeviceServ.product(Products.motionSensor).Utility.isOnline()) {
+      this.motionSensorDisabled = false;
+    }
+  }
 
 }
