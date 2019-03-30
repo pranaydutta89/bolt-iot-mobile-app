@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageData } from '../enums';
+import { StorageData, Products } from '../enums';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +7,36 @@ import { StorageData } from '../enums';
 export class StorageService {
 
   constructor() {
+    this.initialize();
   }
 
-  getData(type: StorageData) {
-    return JSON.parse(localStorage.getItem(type.toString()));
+
+  initialize() {
+    if (!this.getData(StorageData.productData)) {
+      this.setData(StorageData.productData, {
+        [Products.motionSensor]: []
+      });
+    }
+
+    if (!this.getData(StorageData.productStatus)) {
+      this.setData(StorageData.productStatus, {
+        [Products.motionSensor]: false
+      });
+    }
+  }
+
+  getData<T>(type: StorageData): T {
+    const data = localStorage.getItem(type.toString());
+    if (data) {
+      return JSON.parse(localStorage.getItem(type.toString())) as T;
+    } else {
+      return null;
+    }
   }
 
   setData(type: StorageData, data: any) {
     localStorage.setItem(type.toString(), JSON.stringify(data));
   }
+
+
 }

@@ -15,12 +15,11 @@
       <ion-img src="/assets/thief.jpg"></ion-img>
       <ion-card-header>
         <ion-card-subtitle>Motion Detector</ion-card-subtitle>
-        <ion-card-title>Sense Before its too late!!</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-list>
           <ion-item [disabled]="motionSensorDisabled">
-            <ion-toggle color="dark"></ion-toggle>
+            <ion-toggle color="dark" (ionChange)="motionChanged()" [(ngModel)]="productStatus[0]"></ion-toggle>
             <ion-label>Enabled</ion-label>
           </ion-item>
           <ion-item>

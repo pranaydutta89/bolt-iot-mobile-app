@@ -4,5 +4,6 @@ export enum Products {
 
 
 export enum StorageData {
-
+    productStatus,
+    productData
 }

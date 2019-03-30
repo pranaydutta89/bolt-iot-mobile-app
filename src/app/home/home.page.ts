@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { DeviceService } from '../services/device.service';
-import { Products } from '../enums';
+import { Products, StorageData } from '../enums';
+import { IProductStatus } from '../interface';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +12,27 @@ import { Products } from '../enums';
 })
 export class HomePage {
 
-  private motionSensorDisabled = true;
-  constructor(private DeviceServ: DeviceService) {
+  public motionSensorDisabled = true;
+  public productStatus: IProductStatus = this.Storage.getData<IProductStatus>(StorageData.productStatus);
+  constructor(private Device: DeviceService, private Storage: StorageService, public toastController: ToastController) {
 
     this.checkStatus();
+    this.Device.MotionSensorStatus = this.productStatus[Products.motionSensor];
   }
 
   async checkStatus() {
-    if (!await this.DeviceServ.product(Products.motionSensor).Utility.isOnline()) {
+    if (await this.Device.isMotionSensorOnline()) {
       this.motionSensorDisabled = false;
     }
   }
+
+  async motionChanged() {
+    if (await this.Device.isMotionSensorOnline()) {
+      this.Storage.setData(StorageData.productStatus, this.productStatus);
+      this.Device.MotionSensorStatus = this.productStatus[Products.motionSensor];
+    }
+  }
+
+
 
 }

@@ -12,7 +12,7 @@ import { StorageService } from './services/storage.service';
 import { DeviceService } from './services/device.service';
 
 // @ts-ignore
-let global = window.globalThis
+const global = window.globalThis;
 global.fetch = window.fetch.bind(window);
 
 export function initializeDevices(deviceService: DeviceService) {
