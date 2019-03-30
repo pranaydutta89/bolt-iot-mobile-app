@@ -5,6 +5,7 @@ import { Products, StorageData } from '../enums';
 import { ToastController } from '@ionic/angular';
 import { IDigitalParam } from 'bolt-iot-wrapper/dist/Interfaces';
 import { StorageService } from './storage.service';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class DeviceService {
 
     private deviceList: IDevice[] = [];
     private motionSensorStatus = false;
-    constructor(public toastController: ToastController, private Storage: StorageService) {
+    constructor(public toastController: ToastController,
+        private Storage: StorageService, private notificationSerivce: NotificationsService) {
     }
 
     init() {
@@ -51,6 +53,9 @@ export class DeviceService {
                 state: data.state,
                 timestamp: Date.now()
             });
+            if (data.state === Enums.STATE.high) {
+                this.notificationSerivce.show('Intrution Detected');
+            }
             this.Storage.setData(StorageData.productData, products);
             return this.motionSensorStatus;
         };
