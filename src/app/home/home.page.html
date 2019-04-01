@@ -25,9 +25,12 @@
           <ion-item>
             <ion-label>Last Movement</ion-label>
           </ion-item>
+          <ion-item [routerDirection]="'forward'" [routerLink]="detailsRoute[0]">
+            <ion-label>Details</ion-label>
+          </ion-item>
+
         </ion-list>
       </ion-card-content>
     </ion-card>
   </ion-list>
-
 </ion-content>

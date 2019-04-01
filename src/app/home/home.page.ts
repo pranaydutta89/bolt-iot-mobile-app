@@ -14,6 +14,9 @@ export class HomePage {
 
   public motionSensorDisabled = true;
   public productStatus: IProductStatus = this.Storage.getData<IProductStatus>(StorageData.productStatus);
+  public detailsRoute = {
+    [Products.motionSensor]: '/digital/0'
+  }
   constructor(private Device: DeviceService, private Storage: StorageService, public toastController: ToastController) {
 
     this.checkStatus();
