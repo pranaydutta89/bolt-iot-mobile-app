@@ -4,13 +4,28 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            Home
+            {{deviceName}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list>
-        digitial list
-    </ion-list>
-
+    <ion-grid>
+        <ion-virtual-scroll [items]="detailsData">
+            <ion-item *virtualItem="let item">
+                <ion-row>
+                    <ion-col>
+                        <ion-chip *ngIf="item.state === state.high" color="danger">
+                            <ion-label>High</ion-label>
+                        </ion-chip>
+                        <ion-chip *ngIf="item.state === state.low" color="primary">
+                            <ion-label>Low</ion-label>
+                        </ion-chip>
+                    </ion-col>
+                    <ion-col>
+                        <ion-chip>{{item.timestamp |fromNow }}</ion-chip>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-virtual-scroll>
+    </ion-grid>
 </ion-content>

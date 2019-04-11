@@ -12,16 +12,8 @@ export class StorageService {
 
 
   initialize() {
-    if (!this.getData(StorageData.productData)) {
-      this.setData(StorageData.productData, {
-        [Products.motionSensor]: []
-      });
-    }
-
-    if (!this.getData(StorageData.productStatus)) {
-      this.setData(StorageData.productStatus, {
-        [Products.motionSensor]: false
-      });
+    if (!this.getData(StorageData.boards)) {
+      this.setData(StorageData.boards, []);
     }
   }
 

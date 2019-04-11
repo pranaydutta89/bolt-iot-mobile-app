@@ -9,18 +9,19 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
-import { DeviceService } from './services/device.service';
+import { BoltService } from './services/bolt.service';
 import { AppConfigService } from './services/appConfig.service';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NotificationsService } from './services/notifications.service';
+import { PipeModule } from './pipes/pipe.module';
 
 // @ts-ignore
 const global = window.globalThis;
 global.fetch = window.fetch.bind(window);
-export function initializeDevices(deviceService: DeviceService) {
+export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
-    return deviceService.init();
+    return boltService.init();
   };
 }
 export function initializeApp(appConfigService: AppConfigService) {
@@ -35,13 +36,14 @@ export function initializeApp(appConfigService: AppConfigService) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    PipeModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     StorageService,
-    DeviceService,
+    BoltService,
     BackgroundMode,
     LocalNotifications,
     NotificationsService,
@@ -50,7 +52,7 @@ export function initializeApp(appConfigService: AppConfigService) {
       provide: RouteReuseStrategy, useClass: IonicRouteStrategy
     },
     {
-      provide: APP_INITIALIZER, useFactory: initializeDevices, deps: [DeviceService], multi: true
+      provide: APP_INITIALIZER, useFactory: initializeDevices, deps: [BoltService], multi: true
     }
     ,
     {

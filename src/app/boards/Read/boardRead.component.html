@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            {{board}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item *ngIf="isInitialzing">
+        <ion-spinner></ion-spinner>
+    </ion-item>
+    <div *ngIf="!isInitialzing">
+        <ion-item>
+            <ion-toggle (ionChange)="pinStateChanged(PINS.zero)" [(ngModel)]="pinsState[PINS.zero]"></ion-toggle>
+            <ion-label>Pin 0</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-toggle (ionChange)="pinStateChanged(PINS.one)" [(ngModel)]="pinsState[PINS.one]"></ion-toggle>
+            <ion-label>Pin 1</ion-label>
+
+        </ion-item>
+        <ion-item>
+            <ion-toggle (ionChange)="pinStateChanged(PINS.two)" [(ngModel)]="pinsState[PINS.two]"></ion-toggle>
+            <ion-label>Pin 2</ion-label>
+
+        </ion-item>
+        <ion-item>
+            <ion-toggle (ionChange)="pinStateChanged(PINS.three)" [(ngModel)]="pinsState[PINS.three]"></ion-toggle>
+            <ion-label>Pin 3</ion-label>
+
+        </ion-item>
+        <ion-item>
+            <ion-toggle (ionChange)="pinStateChanged(PINS.four)" [(ngModel)]="pinsState[PINS.four]"></ion-toggle>
+            <ion-label>Pin 4</ion-label>
+
+        </ion-item>
+    </div>
+</ion-content>

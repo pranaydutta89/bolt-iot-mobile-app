@@ -15,15 +15,19 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'digital/:productNumber',
-    component: DigitalListComponent
-  }
+    path: 'boards',
+    loadChildren: './boards/boards.module#BoardsModule'
+  },
+
 ];
 
 @NgModule({
   imports: [
     DigitalModule,
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes,
+      {
+        preloadingStrategy: PreloadAllModules, enableTracing: true
+      })
   ],
   exports: [RouterModule]
 })

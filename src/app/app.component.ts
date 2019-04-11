@@ -14,6 +14,11 @@ export class AppComponent {
       title: 'Home',
       url: '/home',
       icon: 'home'
+    },
+    {
+      title: 'CUD Board',
+      url: '/boards/cud',
+      icon: 'clipboard'
     }
   ];
 

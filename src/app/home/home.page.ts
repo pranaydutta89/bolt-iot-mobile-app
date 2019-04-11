@@ -1,8 +1,8 @@
+import { IBoards } from './../interface.d';
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { DeviceService } from '../services/device.service';
-import { Products, StorageData } from '../enums';
-import { IProductStatus } from '../interface';
+import { Boards, StorageData } from '../enums';
+
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -12,29 +12,11 @@ import { StorageService } from '../services/storage.service';
 })
 export class HomePage {
 
-  public motionSensorDisabled = true;
-  public productStatus: IProductStatus = this.Storage.getData<IProductStatus>(StorageData.productStatus);
-  public detailsRoute = {
-    [Products.motionSensor]: '/digital/0'
-  }
-  constructor(private Device: DeviceService, private Storage: StorageService, public toastController: ToastController) {
+  public boards = this.Storage.getData<IBoards[]>(StorageData.boards);
+  constructor(private Storage: StorageService, public toastController: ToastController) {
 
-    this.checkStatus();
-    this.Device.MotionSensorStatus = this.productStatus[Products.motionSensor];
   }
 
-  async checkStatus() {
-    if (await this.Device.isMotionSensorOnline()) {
-      this.motionSensorDisabled = false;
-    }
-  }
-
-  async motionChanged() {
-    if (await this.Device.isMotionSensorOnline()) {
-      this.Storage.setData(StorageData.productStatus, this.productStatus);
-      this.Device.MotionSensorStatus = this.productStatus[Products.motionSensor];
-    }
-  }
 
 
 
