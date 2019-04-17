@@ -41,6 +41,7 @@
     "moment": "~2.24.0",
     "rxjs": "~6.3.3",
     "uuid": "~3.3.2",
+    "xcode": "^2.0.0",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -86,7 +87,8 @@
       "cordova-plugin-local-notification": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
