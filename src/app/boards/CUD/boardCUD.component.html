@@ -1,0 +1,101 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Modify Boards
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-item *ngIf="boards.length ===0">No Boards to list</ion-item>
+        <ion-card *ngFor="let board of boards;index as i">
+
+
+            <ion-item>
+                <ion-input [(ngModel)]="board.name" placeholder="Board Name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input [(ngModel)]="board.boltProductName" placeholder="Bolt Product Name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="board.apiKey" placeholder="Bolt Api Key"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="board.pins.length !==0">
+                <ion-label>Pin Details</ion-label>
+            </ion-item>
+            <ion-item *ngIf="board.pins.length ===0">
+                <ion-label>No Pin Added</ion-label>
+            </ion-item>
+            <div *ngFor="let pin of board.pins;index as j">
+                <ion-item>
+                    <ion-input [(ngModel)]="pin.name" placeholder="Pin Name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-select [(ngModel)]="pin.number" placeholder="Select Pin">
+                        <ion-select-option value="0">Zero</ion-select-option>
+                        <ion-select-option value="1">One</ion-select-option>
+                        <ion-select-option value="2">Two</ion-select-option>
+                        <ion-select-option value="3">Three</ion-select-option>
+                        <ion-select-option value="4">Four</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-toggle [(ngModel)]="pin.loopEnabled"></ion-toggle>
+                    <ion-label>Enable Polling</ion-label>
+                </ion-item>
+                <div *ngIf="pin.loopEnabled">
+                    <ion-item>
+                        <ion-label>Trigger on</ion-label>
+                        <ion-select [(ngModel)]="pin.triggerOn" placeholder="Select State">
+                            <ion-select-option value="{{STATE.high}}">High</ion-select-option>
+                            <ion-select-option value="{{STATE.low}}">Low</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Loop Action</ion-label>
+                        <ion-select [(ngModel)]="pin.loopAction" placeholder="Select Action">
+                            <ion-select-option [value]="loopAction.store">Store</ion-select-option>
+                            <ion-select-option [value]="loopAction.notification">Notification</ion-select-option>
+                            <ion-select-option [value]="loopAction.storeAndNotification">Store & Notification
+                            </ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </div>
+                <ion-item>
+                    <ion-chip (click)="board.pins.splice(j,1)">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                        <ion-label>Delete Pin</ion-label>
+                    </ion-chip>
+                </ion-item>
+            </div>
+            <ion-item>
+                <ion-chip (click)="board.pins.push({})">
+                    <ion-icon name="pin"></ion-icon>
+                    <ion-label>Add Pin</ion-label>
+                </ion-chip>
+                <ion-chip (click)="boards.splice(i,1)">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    <ion-label>Delete Board</ion-label>
+                </ion-chip>
+            </ion-item>
+        </ion-card>
+        <ion-item>
+            <ion-chip (click)="addBoard()">
+                <ion-icon name="clipboard"></ion-icon>
+                <ion-label>Add Board</ion-label>
+            </ion-chip>
+            <ion-chip (click)="save()">
+                <ion-icon name="save"></ion-icon>
+                <ion-label>Save</ion-label>
+            </ion-chip>
+            <ion-chip (click)="discard()">
+                <ion-icon name="save"></ion-icon>
+                <ion-label>Discard</ion-label>
+            </ion-chip>
+        </ion-item>
+    </ion-grid>
+</ion-content>

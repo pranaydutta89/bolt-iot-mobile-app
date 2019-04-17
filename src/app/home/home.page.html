@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let board of boards">
+    <ion-item>
+      <ion-label>{{board.name}}</ion-label>
+    </ion-item>
+    <ion-item [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id">
+      <ion-label>Details</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-item *ngIf="boards.length ===0" [routerDirection]="'forward'" [routerLink]="'/boards/cud'">
+    Add Boards
+  </ion-item>
+</ion-content>
