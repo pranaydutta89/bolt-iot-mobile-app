@@ -4,13 +4,13 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            {{deviceName}}
+            {{board.name}} {{pin}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-grid>
-        <ion-virtual-scroll [items]="detailsData">
+        <ion-virtual-scroll [items]="storeData | orderBy:'timeStamp'">
             <ion-item *virtualItem="let item">
                 <ion-row>
                     <ion-col>
@@ -22,7 +22,7 @@
                         </ion-chip>
                     </ion-col>
                     <ion-col>
-                        <ion-chip>{{item.timestamp |fromNow }}</ion-chip>
+                        <ion-chip>{{item.timeStamp |fromNow }}</ion-chip>
                     </ion-col>
                 </ion-row>
             </ion-item>

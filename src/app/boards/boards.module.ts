@@ -14,7 +14,7 @@ import BoardCUDComponent from './CUD/boardCUD.component';
         CommonModule,
         FormsModule,
         RouterModule.forChild([{
-            path: 'read\:boardId',
+            path: 'read/:boardId',
             component: BoardReadComponent
         }, {
             path: 'cud',

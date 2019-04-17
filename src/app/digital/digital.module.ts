@@ -10,7 +10,11 @@ import { PipeModule } from '../pipes/pipe.module';
     imports: [
         IonicModule,
         CommonModule,
-        PipeModule
-    ]
+        PipeModule,
+        RouterModule.forChild([{
+            path: ':boardId/:pinId',
+            component: DigitalListComponent
+        }]),
+    ],
 })
 export class DigitalModule { }

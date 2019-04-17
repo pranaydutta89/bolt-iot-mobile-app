@@ -5,14 +5,20 @@ export enum Products {
 
 
 export enum StorageData {
-     boards
+    boards
 }
 
 export enum Boards {
-    hall  
+    hall,
 }
 
-export enum PinType{
+export enum LoopAction {
+    store,
+    notification,
+    storeAndNotification
+}
+
+export enum PinType {
     digital,
     analog
 }

@@ -1,11 +1,12 @@
-import { PINS } from 'bolt-iot-wrapper/dist/Enums';
+import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IBoards } from 'src/app/interface';
-import { StorageData } from 'src/app/enums';
+import { StorageData, LoopAction } from 'src/app/enums';
 import { v4 } from 'uuid';
 import { BoltService } from 'src/app/services/bolt.service';
 import { Devices } from 'bolt-iot-wrapper';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
     selector: 'board-cud',
@@ -15,7 +16,9 @@ export default class BoardCUDComponent {
 
     public boards: IBoards[];
     public pins = Object.keys(PINS);
-    constructor(private storage: StorageService, private boltService: BoltService) {
+    public STATE = STATE;
+    public loopAction = LoopAction;
+    constructor(private storage: StorageService, private boltService: BoltService, public toastService: ToastService) {
         this.init();
     }
 
@@ -37,6 +40,7 @@ export default class BoardCUDComponent {
         await this.checkBoardStatus();
         this.storage.setData(StorageData.boards, this.boards);
         this.boltService.init();
+        this.toastService.success('Board Details Saved');
     }
 
     public discard() {
@@ -44,14 +48,16 @@ export default class BoardCUDComponent {
     }
 
     public async checkBoardStatus() {
-        await this.boards.forEach(async (r) => {
-            if (!Devices.isDeviceAdded(r.boltProductName)) {
-                this.boltService.addDevice(r.boltProductName, r.apiKey);
+
+        for (const board of this.boards) {
+            if (!Devices.isDeviceAdded(board.boltProductName)) {
+                this.boltService.addDevice(board.boltProductName, board.apiKey);
             }
-            if (!await this.boltService.readDevice(r.boltProductName).
-                instance.Utility.isOnline()) {
-                throw new Error(`Bolt Device ${r.boltProductName} is offline`);
+            if (!await this.boltService.readDevice(board.boltProductName).Utility.isOnline()) {
+                const msg = `Bolt Device ${board.boltProductName} is offline`;
+                this.toastService.error(msg);
+                return await Promise.reject(msg);
             }
-        });
+        }
     }
 }

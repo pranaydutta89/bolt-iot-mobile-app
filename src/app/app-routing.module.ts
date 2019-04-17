@@ -1,7 +1,6 @@
-import { DigitalModule } from './digital/digital.module';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DigitalListComponent } from './digital/digital.page';
+
 
 
 const routes: Routes = [
@@ -18,12 +17,15 @@ const routes: Routes = [
     path: 'boards',
     loadChildren: './boards/boards.module#BoardsModule'
   },
+  {
+    path: 'digital',
+    loadChildren: './digital/digital.module#DigitalModule'
+  }
 
 ];
 
 @NgModule({
   imports: [
-    DigitalModule,
     RouterModule.forRoot(routes,
       {
         preloadingStrategy: PreloadAllModules, enableTracing: true

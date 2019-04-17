@@ -20,12 +20,21 @@ export class ToastService {
         toast.present();
     }
 
-    async error(message: string) {
+    async success(message: string) {
         const toast = await this.toastController.create({
             message: message,
             duration: 2000,
-            color: 'danger'
+            color: 'success'
         });
         toast.present();
+    }
+    async error(message: string) {
+        const toast = await this.toastController.create({
+            message: message,
+            showCloseButton: true,
+            duration: 5000,
+            color: 'danger'
+        });
+        await toast.present();
     }
 }
