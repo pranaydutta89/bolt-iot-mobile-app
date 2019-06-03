@@ -16,12 +16,7 @@ const routes: Routes = [
   {
     path: 'boards',
     loadChildren: './boards/boards.module#BoardsModule'
-  },
-  {
-    path: 'digital',
-    loadChildren: './digital/digital.module#DigitalModule'
   }
-
 ];
 
 @NgModule({

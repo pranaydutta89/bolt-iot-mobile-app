@@ -44,28 +44,6 @@
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-toggle [(ngModel)]="pin.loopEnabled"></ion-toggle>
-                    <ion-label>Enable Polling</ion-label>
-                </ion-item>
-                <div *ngIf="pin.loopEnabled">
-                    <ion-item>
-                        <ion-label>Trigger on</ion-label>
-                        <ion-select [(ngModel)]="pin.triggerOn" placeholder="Select State">
-                            <ion-select-option value="{{STATE.high}}">High</ion-select-option>
-                            <ion-select-option value="{{STATE.low}}">Low</ion-select-option>
-                        </ion-select>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label>Loop Action</ion-label>
-                        <ion-select [(ngModel)]="pin.loopAction" placeholder="Select Action">
-                            <ion-select-option [value]="loopAction.store">Store</ion-select-option>
-                            <ion-select-option [value]="loopAction.notification">Notification</ion-select-option>
-                            <ion-select-option [value]="loopAction.storeAndNotification">Store & Notification
-                            </ion-select-option>
-                        </ion-select>
-                    </ion-item>
-                </div>
-                <ion-item>
                     <ion-chip (click)="board.pins.splice(j,1)">
                         <ion-icon name="close-circle-outline"></ion-icon>
                         <ion-label>Delete Pin</ion-label>
