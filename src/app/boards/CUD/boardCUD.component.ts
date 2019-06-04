@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/services/toast.service';
     selector: 'board-cud',
     templateUrl: 'boardCUD.component.html'
 })
-export default class BoardCUDComponent {
+export class BoardCUDComponent {
 
     public boards: IBoards[];
     public pins = Object.keys(PINS);

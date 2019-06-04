@@ -10,16 +10,14 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="!isInitialzing">
+    <div>
         <ion-list *ngFor="let pin of board.pins">
-            <ion-item *ngIf="!pin.loopEnabled">
+            <ion-item>
                 <ion-label>{{pin.name}}</ion-label>
                 <ion-button size="large" (click)="pinStateChanged(pin.number,STATE.low)">On</ion-button>
                 <ion-button size="large" color="danger" (click)="pinStateChanged(pin.number,STATE.high)">Off
                 </ion-button>
-
             </ion-item>
         </ion-list>
-
     </div>
 </ion-content>

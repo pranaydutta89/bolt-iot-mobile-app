@@ -1,6 +1,6 @@
 import { Boards, LoopAction } from './../enums';
 import { StorageService } from './storage.service';
-import { IDevice, IBoards, IPin } from './../interface.d';
+import { IDevice, IBoards, IPin } from '../interface';
 import { Injectable } from '@angular/core';
 import { StorageData } from '../enums';
 import { Devices, PubSub } from 'bolt-iot-wrapper';

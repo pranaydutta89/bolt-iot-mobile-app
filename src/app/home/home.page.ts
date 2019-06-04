@@ -1,4 +1,4 @@
-import { IBoards } from './../interface.d';
+import { IBoards } from '../interface';
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Boards, StorageData } from '../enums';
