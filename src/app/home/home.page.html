@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -10,15 +10,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let board of boards">
+
+  <ion-card *ngFor="let board of boards" [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id">
+    <ion-card-header>
+      <ion-card-title>{{board.name}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <!-- <ion-list *ngFor="let board of boards">
     <ion-item>
       <ion-label>{{board.name}}</ion-label>
     </ion-item>
     <ion-item [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id">
       <ion-label>Details</ion-label>
     </ion-item>
-  </ion-list>
-  <ion-item *ngIf="boards.length ===0" [routerDirection]="'forward'" [routerLink]="'/boards/cud'">
+  </ion-list> -->
+  <!-- <ion-item [routerDirection]="'forward'" [routerLink]="'/boards/cud'">
     Add Boards
-  </ion-item>
+  </ion-item> -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" [routerDirection]="'forward'" [routerLink]="'/boards/cud'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
