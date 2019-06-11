@@ -1,10 +1,10 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            Modify Boards
+            Boards
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -61,19 +61,12 @@
                 </ion-chip>
             </ion-item>
         </ion-card>
-        <ion-item>
-            <ion-chip (click)="addBoard()">
-                <ion-icon name="clipboard"></ion-icon>
-                <ion-label>Add Board</ion-label>
-            </ion-chip>
-            <ion-chip (click)="save()">
-                <ion-icon name="save"></ion-icon>
-                <ion-label>Save</ion-label>
-            </ion-chip>
-            <ion-chip (click)="discard()">
-                <ion-icon name="save"></ion-icon>
-                <ion-label>Discard</ion-label>
-            </ion-chip>
-        </ion-item>
+
     </ion-grid>
+    <ion-button *ngIf="boards.length !==0" (click)="save()" expand="block">Save</ion-button>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="addBoard()" color="secondary">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
