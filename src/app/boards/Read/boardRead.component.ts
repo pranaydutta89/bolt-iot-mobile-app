@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Boards, StorageData } from '../../enums';
 import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
-import { IDeviceInstance, IBoards, IDevice, IPin, IPinState } from '../../interface';
+import { IDeviceInstance, IBoard, IDevice, IPin, IPinState } from '../../interface';
 import { IDigitalParam } from 'bolt-iot-wrapper/dist/Interfaces';
 import { Statement } from '@angular/compiler';
 
@@ -14,7 +14,7 @@ import { Statement } from '@angular/compiler';
     selector: 'board-read'
 })
 export class BoardReadComponent {
-    public board: IBoards;
+    public board: IBoard;
     public boardId: string = this.route.snapshot.paramMap.get('boardId');
     public PINS = PINS;
     public STATE = STATE;
@@ -25,7 +25,7 @@ export class BoardReadComponent {
 
 
     async init() {
-        this.board = this.storage.getData<IBoards[]>(StorageData.boards).
+        this.board = this.storage.getData<IBoard[]>(StorageData.boards).
             find(r => r.id === this.boardId);
         this.device = this.boltService.readDevice(this.board.boltProductName);
     }

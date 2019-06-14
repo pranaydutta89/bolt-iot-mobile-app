@@ -1,6 +1,5 @@
-import { Boards, LoopAction } from './../enums';
 import { StorageService } from './storage.service';
-import { IDevice, IBoards, IPin } from '../interface';
+import { IDevice, IBoard, IPin } from '../interface';
 import { Injectable } from '@angular/core';
 import { StorageData } from '../enums';
 import { Devices, PubSub } from 'bolt-iot-wrapper';
@@ -62,7 +61,7 @@ export class BoltService {
     }
 
     public async init() {
-        const boards = this.storage.getData<IBoards[]>(StorageData.boards);
+        const boards = this.storage.getData<IBoard[]>(StorageData.boards);
         boards.forEach(r => {
             if (!Devices.isDeviceAdded(r.boltProductName)) {
                 Devices.add(r.boltProductName, r.apiKey);

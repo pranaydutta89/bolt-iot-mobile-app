@@ -4,19 +4,34 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Crawled
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let board of boards" [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id">
-    <ion-card-header>
-      <ion-card-title>{{board.name}}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+  <ion-item lines="none" *ngIf="boards.length ===0">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Add Boards</ion-card-subtitle>
+        <ion-card-title>Press the add button below</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img src="../assets/images/home.jpg" />
+        Your awesome home automation is just one step away
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+  <ion-item lines="none" *ngIf="boards.length !==0">
+    <ion-card *ngFor="let board of boards" [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id">
+      <ion-card-header>
+        <ion-card-title>{{board.name}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-item>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" [routerDirection]="'forward'" [routerLink]="'/boards/cud'">
+    <ion-fab-button color="secondary" [routerDirection]="'forward'" [routerLink]="'/boards/cud/new'">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

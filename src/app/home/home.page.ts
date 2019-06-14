@@ -1,4 +1,4 @@
-import { IBoards } from '../interface';
+import { IBoard } from '../interface';
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Boards, StorageData } from '../enums';
@@ -12,7 +12,7 @@ import { StorageService } from '../services/storage.service';
 })
 export class HomePage {
 
-  public boards = this.Storage.getData<IBoards[]>(StorageData.boards);
+  public boards = this.Storage.getData<IBoard[]>(StorageData.boards);
   constructor(private Storage: StorageService, public toastController: ToastController) {
 
   }

@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BoardReadComponent } from './Read/boardRead.component';
@@ -12,12 +12,13 @@ import { BoardCUDComponent } from './CUD/boardCUD.component';
     imports: [
         IonicModule,
         CommonModule,
+        ReactiveFormsModule,
         FormsModule,
         RouterModule.forChild([{
             path: 'read/:boardId',
             component: BoardReadComponent
         }, {
-            path: 'cud',
+            path: 'cud/:boardId',
             component: BoardCUDComponent
         }])
     ]

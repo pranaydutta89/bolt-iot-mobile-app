@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+            <ion-back-button class="show-back-button"></ion-back-button>
         </ion-buttons>
         <ion-title>
             Boards
@@ -9,64 +9,72 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-grid>
-        <ion-item *ngIf="boards.length ===0">No Boards to list</ion-item>
-        <ion-card *ngFor="let board of boards;index as i">
-
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Enter Basic Info</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="stacked">Board Name</ion-label>
+                <ion-input clearInput [(ngModel)]="board.name"></ion-input>
+            </ion-item>
 
             <ion-item>
-                <ion-input [(ngModel)]="board.name" placeholder="Board Name"></ion-input>
-            </ion-item>
-
-            <ion-item>
-                <ion-input [(ngModel)]="board.boltProductName" placeholder="Bolt Product Name"></ion-input>
+                <ion-label position="stacked">Bolt Product Name</ion-label>
+                <ion-input clearInput [(ngModel)]="board.boltProductName"></ion-input>
             </ion-item>
             <ion-item>
-                <ion-input [(ngModel)]="board.apiKey" placeholder="Bolt Api Key"></ion-input>
+                <ion-label position="stacked">Bolt Api Key</ion-label>
+                <ion-input clearInput [(ngModel)]="board.apiKey"></ion-input>
             </ion-item>
-            <ion-item *ngIf="board.pins.length !==0">
-                <ion-label>Pin Details</ion-label>
+            <ion-item>
+                <ion-label position="stacked">Description</ion-label>
+                <ion-input clearInput [(ngModel)]="board.description"></ion-input>
             </ion-item>
-            <ion-item *ngIf="board.pins.length ===0">
-                <ion-label>No Pin Added</ion-label>
-            </ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Enter Pin Details</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
             <div *ngFor="let pin of board.pins;index as j">
                 <ion-item>
-                    <ion-input [(ngModel)]="pin.name" placeholder="Pin Name"></ion-input>
+                    <ion-label position="stacked">Pin Name</ion-label>
+                    <ion-input (input)="pinName(pin)" [(ngModel)]="pin.name"></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-select [(ngModel)]="pin.number" placeholder="Select Pin">
-                        <ion-select-option value="0">Zero</ion-select-option>
-                        <ion-select-option value="1">One</ion-select-option>
-                        <ion-select-option value="2">Two</ion-select-option>
-                        <ion-select-option value="3">Three</ion-select-option>
-                        <ion-select-option value="4">Four</ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-chip (click)="board.pins.splice(j,1)">
-                        <ion-icon name="close-circle-outline"></ion-icon>
-                        <ion-label>Delete Pin</ion-label>
-                    </ion-chip>
-                </ion-item>
-            </div>
-            <ion-item>
-                <ion-chip (click)="board.pins.push({})">
-                    <ion-icon name="pin"></ion-icon>
-                    <ion-label>Add Pin</ion-label>
-                </ion-chip>
-                <ion-chip (click)="boards.splice(i,1)">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                    <ion-label>Delete Board</ion-label>
-                </ion-chip>
-            </ion-item>
-        </ion-card>
 
+                <ion-select *ngIf="pin.name" [(ngModel)]="pin.number" placeholder="Select Pin">
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.zero)" [value]="pinDetails.zero">Zero
+                    </ion-select-option>
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.one)" [value]="pinDetails.one">One
+                    </ion-select-option>
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.two)" [value]="pinDetails.two">Two
+                    </ion-select-option>
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.three)" [value]="pinDetails.three">Three
+                    </ion-select-option>
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.four)" [value]="pinDetails.four">Four
+                    </ion-select-option>
+                    <ion-select-option *ngIf="!isPinTaken(pinDetails.A0)" [value]="pinDetails.A0">A0</ion-select-option>
+                </ion-select>
+                <ion-select *ngIf="pin.name && pin.number != undefined" [(ngModel)]="pin.type" placeholder="Pin Type">
+                    <ion-select-option *ngIf="pin.number === pinDetails.A0" [value]="pinType.analogRead">Analog Read
+                    </ion-select-option>
+                    <ion-select-option *ngIf="pin.number ===pinDetails.A0" [value]="pinType.analogWrite">Analog Write
+                    </ion-select-option>
+                    <ion-select-option *ngIf="pin.number !==pinDetails.A0" [value]="pinType.digitalRead">Digital Read
+                    </ion-select-option>
+                    <ion-select-option *ngIf="pin.number !==pinDetails.A0" [value]="pinType.digitalWrite">Digital Write
+                    </ion-select-option>
+                </ion-select>
+                <ion-button (click)="board.pins.splice(j,1)" color="danger" expand="block">Delete Pin</ion-button>
+
+            </div>
+            <ion-button (click)="board.pins.push({})" [disabled]="board.pins.length===6" expand="block">Add Pin
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+    <ion-grid>
+        <ion-button color="secondary" expand="block">Save</ion-button>
     </ion-grid>
-    <ion-button *ngIf="boards.length !==0" (click)="save()" expand="block">Save</ion-button>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="addBoard()" color="secondary">
-            <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
 </ion-content>
