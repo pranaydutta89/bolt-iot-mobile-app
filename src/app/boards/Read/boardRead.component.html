@@ -1,7 +1,7 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+            <ion-back-button class="show-back-button"></ion-back-button>
         </ion-buttons>
         <ion-title>
             {{board.name}}
@@ -11,13 +11,48 @@
 
 <ion-content>
     <div>
-        <ion-list *ngFor="let pin of board.pins">
-            <ion-item>
-                <ion-label>{{pin.name}}</ion-label>
-                <ion-button size="large" (click)="pinStateChanged(pin.number,STATE.low)">On</ion-button>
-                <ion-button size="large" color="danger" (click)="pinStateChanged(pin.number,STATE.high)">Off
-                </ion-button>
-            </ion-item>
-        </ion-list>
+        <ion-card *ngFor="let pin of board.pins">
+            <ion-card-header>
+                <ion-card-title>{{pin.name}}</ion-card-title>
+                <ion-card-subtitle>{{pin.number}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+                <div [ngSwitch]="pin.type">
+                    <ion-grid *ngSwitchCase="pinType.digitalWrite">
+                        <ion-row>
+
+                            <ion-col>
+                                <ion-button expand="full" color="secondary"
+                                    (click)="pinStateChanged(pin.number,STATE.low)">On
+                                </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button expand="full" color="danger"
+                                    (click)="pinStateChanged(pin.number,STATE.high)">Off
+                                </ion-button>
+                            </ion-col>
+
+
+                        </ion-row>
+                    </ion-grid>
+                    <ion-grid *ngSwitchCase="pinType.digitalRead">
+                        <ion-row>
+                            <ion-col>
+                                <ion-button expand="full" color="secondary" (click)="readPinState(pin)">Check
+                                </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <div [ngSwitch]="pin.readState" style="margin-top: 0.8rem">
+                                    <ion-badge *ngSwitchCase="STATE.low" color="success">Low</ion-badge>
+                                    <ion-badge *ngSwitchCase="STATE.high" color="warning">High</ion-badge>
+                                    <ion-badge *ngSwitchDefault color="medium">Unknown</ion-badge>
+                                </div>
+                            </ion-col>
+
+                        </ion-row>
+                    </ion-grid>
+                </div>
+            </ion-card-content>
+        </ion-card>
     </div>
 </ion-content>

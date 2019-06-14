@@ -34,4 +34,6 @@ export interface IPin {
     number: PINS;
     type: PinType;
 
+    readState: STATE;
+
 }

@@ -2,10 +2,10 @@ import { BoltService } from './../../services/bolt.service';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Boards, StorageData } from '../../enums';
+import { Boards, StorageData, PinType } from '../../enums';
 import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { IDeviceInstance, IBoard, IDevice, IPin, IPinState } from '../../interface';
-import { IDigitalParam } from 'bolt-iot-wrapper/dist/Interfaces';
+import { IDigitalParam, IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 import { Statement } from '@angular/compiler';
 
 
@@ -18,6 +18,7 @@ export class BoardReadComponent {
     public boardId: string = this.route.snapshot.paramMap.get('boardId');
     public PINS = PINS;
     public STATE = STATE;
+    public pinType = PinType;
     public device: IDeviceInstance;
     constructor(private route: ActivatedRoute, private storage: StorageService, private boltService: BoltService) {
         this.init();
@@ -31,10 +32,12 @@ export class BoardReadComponent {
     }
 
     async pinStateChanged(pin: PINS, state) {
-
         await this.device.Digital.write({ pin, state });
+    }
 
-
+    async readPinState(pin: IPin) {
+        const res = await this.device.Digital.read(pin.number) as IDigitalReturn;
+        pin.readState = res.state;
     }
 }
 
