@@ -45,17 +45,17 @@
                 </ion-item>
 
                 <ion-select *ngIf="pin.name" [(ngModel)]="pin.number" placeholder="Select Pin">
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.zero)" [value]="pinDetails.zero">Zero
+                    <ion-select-option [value]="pinDetails.zero">Zero
                     </ion-select-option>
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.one)" [value]="pinDetails.one">One
+                    <ion-select-option [value]="pinDetails.one">One
                     </ion-select-option>
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.two)" [value]="pinDetails.two">Two
+                    <ion-select-option [value]="pinDetails.two">Two
                     </ion-select-option>
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.three)" [value]="pinDetails.three">Three
+                    <ion-select-option [value]="pinDetails.three">Three
                     </ion-select-option>
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.four)" [value]="pinDetails.four">Four
+                    <ion-select-option [value]="pinDetails.four">Four
                     </ion-select-option>
-                    <ion-select-option *ngIf="!isPinTaken(pinDetails.A0)" [value]="pinDetails.A0">A0</ion-select-option>
+                    <ion-select-option [value]="pinDetails.A0">A0</ion-select-option>
                 </ion-select>
                 <ion-select *ngIf="pin.name && pin.number != undefined" [(ngModel)]="pin.type" placeholder="Pin Type">
                     <ion-select-option *ngIf="pin.number === pinDetails.A0" [value]="pinType.analogRead">Analog Read

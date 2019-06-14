@@ -31,23 +31,23 @@
           <ion-card-title>{{board.boltProductName}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <!-- <img [src]="'https://loremflickr.com/320/240/'+board.name" /> -->
+          <img [src]="'https://source.unsplash.com/1600x900/?'+board.name" />
           {{board.description}}
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                <ion-button color="light" [routerDirection]="'forward'" [routerLink]="'/boards/cud/'+board.id"
-                  expand="full">
-                  Edit</ion-button>
-              </ion-col>
-              <ion-col>
-                <ion-button color="secondary" [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id"
-                  expand="full">
-                  Read</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
         </ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button color="light" [routerDirection]="'forward'" [routerLink]="'/boards/cud/'+board.id"
+                expand="full">
+                Edit</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="secondary" [routerDirection]="'forward'" [routerLink]="'/boards/read/'+board.id"
+                expand="full">
+                Read</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card>
     </div>
   </div>
