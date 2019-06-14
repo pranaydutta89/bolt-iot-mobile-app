@@ -70,11 +70,25 @@
                 <ion-button (click)="board.pins.splice(j,1)" color="danger" expand="block">Delete Pin</ion-button>
 
             </div>
-            <ion-button (click)="board.pins.push({})" [disabled]="board.pins.length===6" expand="block">Add Pin
+            <ion-button (click)="board.pins.push({})" [disabled]="board.pins.length===6" expand="full">Add Pin
             </ion-button>
         </ion-card-content>
     </ion-card>
-    <ion-grid>
-        <ion-button color="secondary" expand="block">Save</ion-button>
+    <ion-grid *ngIf="boardId !=='new'">
+        <ion-row>
+            <ion-col>
+                <ion-button color="danger" expand="full" (click)="delete()">Delete</ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button color="secondary" expand="full" (click)="save()">Save</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="boardId ==='new'">
+        <ion-row>
+            <ion-col>
+                <ion-button color="secondary" expand="full" (click)="save()">Save</ion-button>
+            </ion-col>
+        </ion-row>
     </ion-grid>
 </ion-content>

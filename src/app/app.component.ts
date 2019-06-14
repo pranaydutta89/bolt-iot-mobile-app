@@ -16,8 +16,8 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'CUD Board',
-      url: '/boards/cud',
+      title: 'Add Board',
+      url: '/boards/cud/new',
       icon: 'clipboard'
     }
   ];

@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Boards, StorageData } from '../enums';
 
 import { StorageService } from '../services/storage.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,14 @@ import { StorageService } from '../services/storage.service';
 })
 export class HomePage {
 
-  public boards = this.Storage.getData<IBoard[]>(StorageData.boards);
-  constructor(private Storage: StorageService, public toastController: ToastController) {
-
+  public boards;
+  constructor(private route: ActivatedRoute, private Storage: StorageService, public toastController: ToastController) {
+    route.params.subscribe(val => {
+      // put the code from `ngOnInit` here
+      this.boards = this.Storage.getData<IBoard[]>(StorageData.boards);
+    });
   }
+
 
 
 

@@ -32,7 +32,7 @@ export class ToastService {
         const toast = await this.toastController.create({
             message: message,
             showCloseButton: true,
-            duration: 5000,
+            duration: 15000,
             color: 'danger'
         });
         await toast.present();
