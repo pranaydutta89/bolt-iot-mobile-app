@@ -1,5 +1,5 @@
 {
-  "name": "myHome",
+  "name": "crawled",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -9,7 +9,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "release": "npm run prodBuild && npm run sign",
+    "prodBuild": "ionic cordova build --release android",
+    "sign": "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore platforms\\android\\app\\build\\outputs\\apk\\release\\app-release-unsigned.apk pranay_key -storepass mummypapa90@"
   },
   "private": true,
   "dependencies": {
