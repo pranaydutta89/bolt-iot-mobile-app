@@ -16,7 +16,7 @@ import { NotificationsService } from './notifications.service';
 export class BoltService {
     private loading: HTMLIonLoadingElement;
     private loaderPresented = false;
-    private loopEnabled = true;
+
     constructor(private storage: StorageService, private notificationService: NotificationsService,
         private loadingController: LoadingController, private toastService: ToastService) {
         PubSub.api(this.apiState.bind(this));

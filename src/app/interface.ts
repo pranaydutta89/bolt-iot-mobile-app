@@ -27,6 +27,7 @@ export interface IBoard {
     apiKey: string;
     pins: Array<IPin>;
     description: string;
+    isOnline?: boolean;
 }
 
 export interface IPin {

@@ -25,7 +25,7 @@
   </div>
   <div *ngIf="boards.length !==0">
     <div *ngFor="let board of boards">
-      <ion-card>
+      <ion-card [color]="board.isOnline ? 'tertiary':'danger'">
         <ion-card-header>
           <ion-card-title>{{board.name}}</ion-card-title>
           <ion-card-title>{{board.boltProductName}}</ion-card-title>
