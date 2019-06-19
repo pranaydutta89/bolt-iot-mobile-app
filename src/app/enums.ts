@@ -1,6 +1,10 @@
-import { Digital } from 'bolt-iot-wrapper';
+
 export enum Products {
     motionSensor
+}
+
+export enum Messages {
+    success = 'Comman Executed Succesfully'
 }
 
 

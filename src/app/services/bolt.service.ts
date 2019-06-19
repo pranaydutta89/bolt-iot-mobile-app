@@ -16,6 +16,7 @@ import { NotificationsService } from './notifications.service';
 export class BoltService {
     private loading: HTMLIonLoadingElement;
     private loaderPresented = false;
+    public doShowLoader = true;
 
     constructor(private storage: StorageService, private notificationService: NotificationsService,
         private loadingController: LoadingController, private toastService: ToastService) {
@@ -38,25 +39,25 @@ export class BoltService {
 
     private async apiState(phase: API_PHASE, boltFunction: BOLT_FUNC) {
 
-
-        switch (phase) {
-            case API_PHASE.start:
-                if (!this.loaderPresented) {
-                    this.loading = await this.loadingController.create({
-                        message: 'Reading Device..',
-                    });
-                    await this.loading.present();
-                }
-                this.loaderPresented = true;
-                break;
-            case API_PHASE.completed:
-                while (!this.loaderPresented) {
-                    await this.setTimeoutAsync(10);
-                }
-                await this.setTimeoutAsync(3000);
-                await this.loading.dismiss();
-                this.loaderPresented = false;
-                break;
+        if (this.doShowLoader) {
+            switch (phase) {
+                case API_PHASE.start:
+                    if (!this.loaderPresented) {
+                        this.loading = await this.loadingController.create({
+                            message: 'Reading Device..',
+                        });
+                        await this.loading.present();
+                    }
+                    this.loaderPresented = true;
+                    break;
+                case API_PHASE.completed:
+                    while (!this.loaderPresented) {
+                        await this.setTimeoutAsync(10);
+                    }
+                    await this.loading.dismiss();
+                    this.loaderPresented = false;
+                    break;
+            }
         }
     }
 
