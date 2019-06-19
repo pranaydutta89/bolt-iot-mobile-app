@@ -41,7 +41,7 @@
         <div *ngFor="let board of boards">
           <ion-card [color]="board.isOnline ? '':'danger'">
             <ion-card-header>
-              <ion-card-title>{{board.name}}</ion-card-title>
+              <ion-card-title>{{board.name | uppercase}}</ion-card-title>
               <ion-card-title>{{board.boltProductName}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>

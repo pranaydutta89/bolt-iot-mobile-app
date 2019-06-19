@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageData, Products } from '../enums';
+import { StorageData } from '../enums';
 
 @Injectable({
   providedIn: 'root'
