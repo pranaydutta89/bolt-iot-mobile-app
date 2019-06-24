@@ -16,9 +16,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
 
-// @ts-ignore
-const global = window.globalThis;
-global.fetch = window.fetch.bind(window);
+
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
