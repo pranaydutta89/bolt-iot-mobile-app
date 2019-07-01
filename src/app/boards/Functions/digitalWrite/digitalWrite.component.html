@@ -1,0 +1,40 @@
+<div *ngIf="withModal">
+    <ion-toolbar color="primary">
+        <ion-title>{{withModal.name}}</ion-title>
+        <ion-button slot="end" (click)="dismiss()" color="light">Close</ion-button>
+    </ion-toolbar>
+
+    <ion-content *ngTemplateOutlet='card'>
+
+    </ion-content>
+</div>
+
+<div *ngIf="!withModal">
+    <div *ngTemplateOutlet='card'></div>
+</div>
+
+<ng-template #card>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{pinDetails.name}}</ion-card-title>
+            <ion-card-subtitle>{{pinDetails.number}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-button expand="full" color="secondary" (click)="changeState(STATE.low)">On
+                        </ion-button>
+                    </ion-col>
+                    <ion-col>
+                        <ion-button expand="full" color="danger" (click)="changeState(STATE.high)">Off
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+
+        </ion-card-content>
+    </ion-card>
+
+</ng-template>

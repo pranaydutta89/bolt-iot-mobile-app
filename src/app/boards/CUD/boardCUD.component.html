@@ -60,15 +60,24 @@
                 <ion-select *ngIf="pin.name && pin.number != undefined" [(ngModel)]="pin.type" placeholder="Pin Type">
                     <ion-select-option *ngIf="pin.number === pinDetails.A0" [value]="pinType.analogRead">Analog Read
                     </ion-select-option>
-                    <ion-select-option *ngIf="pin.number ===pinDetails.A0" [value]="pinType.analogWrite">Analog Write
+                    <ion-select-option *ngIf="pin.number !==pinDetails.A0" [value]="pinType.pwm">PWM
                     </ion-select-option>
                     <ion-select-option *ngIf="pin.number !==pinDetails.A0" [value]="pinType.digitalRead">Digital Read
                     </ion-select-option>
                     <ion-select-option *ngIf="pin.number !==pinDetails.A0" [value]="pinType.digitalWrite">Digital Write
                     </ion-select-option>
                 </ion-select>
-                <ion-button (click)="board.pins.splice(j,1)" color="danger" expand="block">Delete Pin</ion-button>
-
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-button (click)="board.pins.splice(j,1)" color="danger" expand="block">Delete
+                            </ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button (click)="testPin(pin)" color="success" expand="block">Test</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </div>
             <ion-button (click)="board.pins.push({})" [disabled]="board.pins.length===6" expand="full">Add Pin
             </ion-button>

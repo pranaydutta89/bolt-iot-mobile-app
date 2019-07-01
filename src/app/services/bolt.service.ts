@@ -6,7 +6,6 @@ import { Devices, PubSub } from 'bolt-iot-wrapper';
 import { API_PHASE, LOG_TYPE, BOLT_FUNC, API_STATUS, PINS } from 'bolt-iot-wrapper/dist/Enums';
 import { LoadingController } from '@ionic/angular';
 import { ToastService } from './toast.service';
-import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 import { NotificationsService } from './notifications.service';
 
 
@@ -69,14 +68,5 @@ export class BoltService {
             }
         });
     }
-
-    addDevice(productName, apiKey) {
-        Devices.add(productName, apiKey);
-    }
-
-    readDevice(productName) {
-        return Devices.read(productName);
-    }
-
 }
 

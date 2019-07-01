@@ -10,49 +10,12 @@
 </ion-header>
 
 <ion-content>
-    <div>
-        <ion-card *ngFor="let pin of board.pins">
-            <ion-card-header>
-                <ion-card-title>{{pin.name}}</ion-card-title>
-                <ion-card-subtitle>{{pin.number}}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <div [ngSwitch]="pin.type">
-                    <ion-grid *ngSwitchCase="pinType.digitalWrite">
-                        <ion-row>
-
-                            <ion-col>
-                                <ion-button expand="full" color="secondary"
-                                    (click)="pinStateChanged(pin.number,STATE.low)">On
-                                </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <ion-button expand="full" color="danger"
-                                    (click)="pinStateChanged(pin.number,STATE.high)">Off
-                                </ion-button>
-                            </ion-col>
-
-
-                        </ion-row>
-                    </ion-grid>
-                    <ion-grid *ngSwitchCase="pinType.digitalRead">
-                        <ion-row>
-                            <ion-col>
-                                <ion-button expand="full" color="secondary" (click)="readPinState(pin)">Check
-                                </ion-button>
-                            </ion-col>
-                            <ion-col>
-                                <div [ngSwitch]="pin.readState" style="margin-top: 0.8rem">
-                                    <ion-badge *ngSwitchCase="STATE.low" color="success">Low</ion-badge>
-                                    <ion-badge *ngSwitchCase="STATE.high" color="warning">High</ion-badge>
-                                    <ion-badge *ngSwitchDefault color="medium">Unknown</ion-badge>
-                                </div>
-                            </ion-col>
-
-                        </ion-row>
-                    </ion-grid>
-                </div>
-            </ion-card-content>
-        </ion-card>
+    <div *ngFor="let pin of board.pins">
+        <div [ngSwitch]='pin.type'>
+            <digital-read *ngSwitchCase='pinType.digitalRead' [board]='board' [pinDetails]='pin'></digital-read>
+            <digital-write *ngSwitchCase='pinType.digitalWrite' [board]='board' [pinDetails]='pin'></digital-write>
+            <pwm *ngSwitchCase='pinType.pwm' [board]='board' [pinDetails]='pin'></pwm>
+        </div>
     </div>
+
 </ion-content>

@@ -7,6 +7,7 @@ import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { IDeviceInstance, IBoard, IPin } from '../../interface';
 import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 import { ToastService } from 'src/app/services/toast.service';
+import { Devices } from 'bolt-iot-wrapper';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class BoardReadComponent {
     async init() {
         this.board = this.storage.getData<IBoard[]>(StorageData.boards).
             find(r => r.id === this.boardId);
-        this.device = this.boltService.readDevice(this.board.boltProductName);
+        this.device = Devices.addAndRead(this.board.boltProductName, this.board.apiKey);
         for (const pin of this.board.pins) {
             if (pin.type === PinType.digitalRead) {
                 await this.readPinState(pin);

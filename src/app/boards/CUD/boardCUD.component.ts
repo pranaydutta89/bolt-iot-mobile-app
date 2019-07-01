@@ -10,7 +10,10 @@ import { ToastService } from 'src/app/services/toast.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-
+import { ModalController } from '@ionic/angular';
+import { DigtialReadComponent } from '../Functions/digitalRead/digitalRead.component';
+import { DigitalWriteComponent } from '../Functions/digitalWrite/digitalWrite.component';
+import { PWMComponent } from '../Functions/PWM/pwm.component';
 @Component({
     selector: 'board-cud',
     templateUrl: 'boardCUD.component.html'
@@ -26,22 +29,12 @@ export class BoardCUDComponent {
     public STATE = STATE;
 
     public pinType = PinType;
-    constructor(private storage: StorageService, private navctrl: NavController,
+    constructor(private storage: StorageService, private navctrl: NavController, private modalController: ModalController,
         private route: ActivatedRoute, private formBuilder: FormBuilder,
         private boltService: BoltService, public toastService: ToastService) {
         this.init();
-        //this.cudFormBuilder();
+        // this.cudFormBuilder();
     }
-
-    private cudFormBuilder() {
-        this.cudForm = this.formBuilder.group({
-            basicInfo: new FormControl('', Validators.compose([
-                Validators.required,
-                Validators.maxLength(50)
-            ]))
-        })
-    }
-
     private init() {
         if (this.boardId === 'new') {
             this.board = {
@@ -94,14 +87,41 @@ export class BoardCUDComponent {
 
     public async checkBoardStatus() {
 
-        if (!Devices.isDeviceAdded(this.board.boltProductName)) {
-            this.boltService.addDevice(this.board.boltProductName, this.board.apiKey);
-        }
-        if (!await this.boltService.readDevice(this.board.boltProductName).Utility.isOnline()) {
+        if (!await Devices.addAndRead(this.board.boltProductName, this.board.apiKey).Utility.isOnline()) {
             const msg = `Bolt Device ${this.board.boltProductName} is offline`;
             this.toastService.error(msg);
             return await Promise.reject(msg);
         }
+    }
+
+    public async testPin(pin: IPin) {
+        let modal;
+        await this.checkBoardStatus();
+        switch (pin.type) {
+            case PinType.digitalRead:
+                modal = await this.modalController.create({
+                    component: DigtialReadComponent,
+                    componentProps: { pinDetails: pin, board: this.board, withModal: { name: 'Test' } }
+                });
+                break;
+
+            case PinType.digitalWrite:
+                modal = await this.modalController.create({
+                    component: DigitalWriteComponent,
+                    componentProps: { pinDetails: pin, board: this.board, withModal: { name: 'Test' } }
+                });
+                break;
+
+            case PinType.pwm:
+                modal = await this.modalController.create({
+                    component: PWMComponent,
+                    componentProps: { pinDetails: pin, board: this.board, withModal: { name: 'Test' } }
+                });
+                break;
+
+        }
+
+        return await modal.present();
     }
 }
 

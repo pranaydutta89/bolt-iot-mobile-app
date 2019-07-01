@@ -6,6 +6,7 @@ import { StorageData } from '../enums';
 import { StorageService } from '../services/storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { BoltService } from '../services/bolt.service';
+import { Devices } from 'bolt-iot-wrapper';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,7 @@ export class HomePage {
       this.loadingState = 'boards';
     }
     for (const board of boards) {
-      board.isOnline = await this.boltService.readDevice(board.boltProductName).Utility.isOnline();
+      board.isOnline = await Devices.addAndRead(board.boltProductName, board.apiKey).Utility.isOnline();
     }
     this.boards = boards;
     this.boltService.doShowLoader = true;

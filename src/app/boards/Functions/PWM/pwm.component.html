@@ -1,0 +1,30 @@
+<div *ngIf="withModal">
+    <ion-toolbar color="primary">
+        <ion-title>{{withModal.name}}</ion-title>
+        <ion-button slot="end" (click)="dismiss()" color="light">Close</ion-button>
+    </ion-toolbar>
+
+    <ion-content *ngTemplateOutlet='card'>
+
+    </ion-content>
+</div>
+
+<div *ngIf="!withModal">
+    <div *ngTemplateOutlet='card'></div>
+</div>
+
+<ng-template #card>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>{{pinDetails.name || 'PWM'}}</ion-card-subtitle>
+            <ion-card-title>{{pinDetails.number}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-range min="0" debounce="300" max="255" step="1" snaps="true" (ionChange)="sliderChanged($event)"
+                color="secondary">
+                <ion-label slot="start">0</ion-label>
+                <ion-label slot="end">255</ion-label>
+            </ion-range>
+        </ion-card-content>
+    </ion-card>
+</ng-template>

@@ -5,10 +5,13 @@ import { BoardReadComponent } from './Read/boardRead.component';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { BoardCUDComponent } from './CUD/boardCUD.component';
+import { DigitalWriteComponent } from './Functions/digitalWrite/digitalWrite.component';
+import { DigtialReadComponent } from './Functions/digitalRead/digitalRead.component';
+import { PWMComponent } from './Functions/PWM/pwm.component';
 
 
 @NgModule({
-    declarations: [BoardReadComponent, BoardCUDComponent],
+    declarations: [BoardReadComponent, BoardCUDComponent, DigitalWriteComponent, DigtialReadComponent, PWMComponent],
     imports: [
         IonicModule,
         CommonModule,
@@ -21,7 +24,9 @@ import { BoardCUDComponent } from './CUD/boardCUD.component';
             path: 'cud/:boardId',
             component: BoardCUDComponent
         }])
-    ]
+    ],
+    entryComponents: [DigitalWriteComponent, DigtialReadComponent, PWMComponent],
+    exports: [DigitalWriteComponent, DigtialReadComponent, PWMComponent]
 })
 export class BoardsModule {
     constructor() { }

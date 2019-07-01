@@ -21,5 +21,5 @@ export enum PinType {
     digitalRead,
     digitalWrite,
     analogRead,
-    analogWrite
+    pwm
 }
