@@ -3,10 +3,11 @@ import { IDevice, IBoard, IPin } from '../interface';
 import { Injectable } from '@angular/core';
 import { StorageData } from '../enums';
 import { Devices, PubSub } from 'bolt-iot-wrapper';
-import { API_PHASE, LOG_TYPE, BOLT_FUNC, API_STATUS, PINS } from 'bolt-iot-wrapper/dist/Enums';
+import { API_PHASE, LOG_TYPE, BOLT_FUNC, API_STATUS, PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { LoadingController } from '@ionic/angular';
 import { ToastService } from './toast.service';
 import { NotificationsService } from './notifications.service';
+import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 
 
 @Injectable({
@@ -67,6 +68,25 @@ export class BoltService {
                 Devices.add(r.boltProductName, r.apiKey);
             }
         });
+    }
+
+    public async pwm(board: IBoard, pin: IPin) {
+        return await Devices.addAndRead(board.boltProductName, board.apiKey).Analog.pwm({
+            pin: pin.number,
+            value: pin.value as number
+        });
+    }
+
+    public async digitalWrite(board: IBoard, pin: IPin) {
+        return await Devices.addAndRead(board.boltProductName, board.apiKey).Digital.write({
+            pin: pin.number,
+            state: pin.value as STATE
+        });
+    }
+
+    public async digitalRead(board: IBoard, pin: IPin) {
+        return await Devices.addAndRead(board.boltProductName, board.apiKey).
+            Digital.read(pin.number) as IDigitalReturn;
     }
 }
 

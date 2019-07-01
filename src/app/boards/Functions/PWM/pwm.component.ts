@@ -15,11 +15,9 @@ export class PWMComponent {
     @Input() pinDetails: IPin;
     @Input() withModal: { name: string };
 
-    sliderChanged(event: any) {
-        Devices.addAndRead(this.board.boltProductName, this.board.apiKey).Analog.pwm({
-            pin: this.pinDetails.number,
-            value: event.detail.value
-        });
+    async sliderChanged(event: any) {
+        this.pinDetails.value = event.detail.value;
+        await this.boltService.pwm(this.board, this.pinDetails);
     }
     dismiss() {
         this.modalCtrl.dismiss();

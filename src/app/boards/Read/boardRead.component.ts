@@ -45,7 +45,7 @@ export class BoardReadComponent {
 
     async readPinState(pin: IPin) {
         const res = await this.device.Digital.read(pin.number) as IDigitalReturn;
-        pin.readState = res.state;
+        pin.value = res.state;
         this.toastService.success(Messages.success);
     }
 }

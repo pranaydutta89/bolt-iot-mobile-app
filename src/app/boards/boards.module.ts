@@ -8,12 +8,14 @@ import { BoardCUDComponent } from './CUD/boardCUD.component';
 import { DigitalWriteComponent } from './Functions/digitalWrite/digitalWrite.component';
 import { DigtialReadComponent } from './Functions/digitalRead/digitalRead.component';
 import { PWMComponent } from './Functions/PWM/pwm.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 @NgModule({
     declarations: [BoardReadComponent, BoardCUDComponent, DigitalWriteComponent, DigtialReadComponent, PWMComponent],
     imports: [
         IonicModule,
+        ComponentsModule,
         CommonModule,
         ReactiveFormsModule,
         FormsModule,

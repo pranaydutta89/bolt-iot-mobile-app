@@ -20,10 +20,8 @@ export class DigitalWriteComponent {
 
     constructor(private boltService: BoltService, private toastService: ToastService, private modalCtrl: ModalController) { }
     async changeState(state: STATE) {
-        await Devices.addAndRead(this.board.boltProductName, this.board.apiKey).Digital.write({
-            pin: this.pinDetails.number,
-            state
-        });
+        this.pinDetails.value = state;
+        await this.boltService.digitalWrite(this.board, this.pinDetails);
         this.toastService.success(Messages.success);
     }
 

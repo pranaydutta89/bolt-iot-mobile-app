@@ -27,7 +27,7 @@
                         </ion-button>
                     </ion-col>
                     <ion-col>
-                        <div [ngSwitch]="pinDetails.readState" style="margin-top: 0.8rem">
+                        <div [ngSwitch]="pinDetails.value" style="margin-top: 0.8rem">
                             <ion-badge *ngSwitchCase="STATE.low" color="success">Low</ion-badge>
                             <ion-badge *ngSwitchCase="STATE.high" color="warning">High</ion-badge>
                             <ion-badge *ngSwitchDefault color="medium">Unknown</ion-badge>

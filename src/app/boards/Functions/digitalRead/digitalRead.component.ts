@@ -21,9 +21,8 @@ export class DigtialReadComponent {
     @Input() board: IBoard;
     @Input() withModal: { name: string };
     async read() {
-        const res = await Devices.addAndRead(this.board.boltProductName, this.board.apiKey).
-            Digital.read(this.pinDetails.number) as IDigitalReturn;
-        this.pinDetails.readState = res.state;
+        const res = await this.boltService.digitalRead(this.board, this.pinDetails);
+        this.pinDetails.value = res.state;
         this.toastService.success(Messages.success);
     }
 
