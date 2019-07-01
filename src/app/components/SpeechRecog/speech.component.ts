@@ -1,6 +1,6 @@
 import { BoltService } from 'src/app/services/bolt.service';
 import { Component } from '@angular/core';
-import { SpeechRecognitionOriginal } from '@ionic-native/speech-recognition';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { StorageService } from 'src/app/services/storage.service';
 import { IBoard } from 'src/app/interface';
 import { StorageData } from 'src/app/enums';
@@ -12,7 +12,7 @@ import { STATE } from 'bolt-iot-wrapper/dist/Enums';
 })
 export class SpeechComponent {
 
-    constructor(private speechRecognition: SpeechRecognitionOriginal,
+    constructor(private speechRecognition: SpeechRecognition,
         private storageService: StorageService,
         private boltService: BoltService) { }
     public async listen() {

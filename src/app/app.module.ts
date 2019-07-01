@@ -1,3 +1,4 @@
+import { ComponentsModule } from './components/components.module';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -11,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
 import { BoltService } from './services/bolt.service';
 import { AppConfigService } from './services/appConfig.service';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
@@ -35,14 +35,14 @@ export function initializeApp(appConfigService: AppConfigService) {
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    PipeModule
+    PipeModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     StorageService,
     BoltService,
-    BackgroundMode,
     LocalNotifications,
     NotificationsService,
     AppConfigService,

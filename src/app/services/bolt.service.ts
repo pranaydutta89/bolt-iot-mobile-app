@@ -63,11 +63,13 @@ export class BoltService {
 
     public async init() {
         const boards = this.storage.getData<IBoard[]>(StorageData.boards);
-        boards.forEach(r => {
-            if (!Devices.isDeviceAdded(r.boltProductName)) {
-                Devices.add(r.boltProductName, r.apiKey);
-            }
-        });
+        if (boards) {
+            boards.forEach(r => {
+                if (!Devices.isDeviceAdded(r.boltProductName)) {
+                    Devices.add(r.boltProductName, r.apiKey);
+                }
+            });
+        }
     }
 
     public async pwm(board: IBoard, pin: IPin) {

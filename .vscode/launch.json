@@ -76,8 +76,8 @@
             "devServerAddress": "localhost",
             "sourceMaps": true,
             "ionicLiveReload": true,
-            "devServerTimeout": 50000,
-            "attachTimeout": 50000
+            "devServerTimeout": 500000,
+            "attachTimeout": 500000
         },
         {
             "name": "Simulate Android in browser",
