@@ -31,9 +31,9 @@ export interface IBoard {
 }
 
 export interface IPin {
-    name: string;
-    number: PINS;
-    type: PinType;
-    value: STATE | number;
+    name?: string;
+    number?: PINS;
+    type?: PinType;
+    value?: STATE | number;
 
 }
