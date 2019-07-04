@@ -19,25 +19,29 @@ export class SpeechComponent {
         if (!await this.speechRecognition.hasPermission()) {
             await this.speechRecognition.requestPermission();
         }
+        this.speechRecognition.startListening().subscribe((keywords: Array<string>) => {
+            this.execute(keywords[0].split(' '));
+        });
 
-        const keywords = await this.speechRecognition.startListening().toPromise();
-        this.execute(keywords);
     }
 
     private execute(keywords: string[]) {
         if (keywords[0]) {
-            const board = this.storageService.getData<IBoard[]>(StorageData.boards).find(r => r.name === keywords[0]);
+            const boards = this.storageService.getData<IBoard[]>(StorageData.boards);
+            const board = boards.find(r => r.name.toLowerCase() === keywords[0].toLowerCase());
             if (board) {
                 if (keywords[1]) {
-                    const pin = board.pins.find(r => r.name === keywords[1]);
+                    const pin = board.pins.find(r => r.name.toLowerCase() === keywords[1].toLowerCase());
                     if (pin) {
                         if (keywords[2]) {
                             switch (keywords[2]) {
+                                case 'start':
                                 case 'on':
                                     pin.value = STATE.low;
                                     this.boltService.digitalWrite(board, pin);
                                     break;
-
+                                case 'of':
+                                case 'stop':
                                 case 'off':
                                     pin.value = STATE.high;
                                     this.boltService.digitalWrite(board, pin);

@@ -13,7 +13,12 @@
             "port": 9222,
             "sourceMaps": true,
             "cwd": "${workspaceFolder}",
-            "ionicLiveReload": false
+            "ionicLiveReload": false,
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Run iOS on device",
@@ -24,7 +29,12 @@
             "port": 9220,
             "sourceMaps": true,
             "cwd": "${workspaceFolder}",
-            "ionicLiveReload": false
+            "ionicLiveReload": false,
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Attach to running android on device",
@@ -34,7 +44,12 @@
             "target": "device",
             "port": 9222,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Attach to running iOS on device",
@@ -44,7 +59,12 @@
             "target": "device",
             "port": 9220,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Run Android on emulator",
@@ -55,7 +75,12 @@
             "port": 9222,
             "sourceMaps": true,
             "cwd": "${workspaceFolder}",
-            "ionicLiveReload": false
+            "ionicLiveReload": false,
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Attach to running android on emulator",
@@ -65,7 +90,12 @@
             "target": "emulator",
             "port": 9222,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Serve to the browser (ionic serve)",
@@ -77,7 +107,12 @@
             "sourceMaps": true,
             "ionicLiveReload": true,
             "devServerTimeout": 500000,
-            "attachTimeout": 500000
+            "attachTimeout": 500000,
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Simulate Android in browser",
@@ -88,7 +123,12 @@
             "simulatePort": 8000,
             "livereload": true,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Simulate iOS in browser",
@@ -99,7 +139,12 @@
             "simulatePort": 8000,
             "livereload": true,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         },
         {
             "name": "Run Browser",
@@ -110,7 +155,12 @@
             "simulatePort": 8000,
             "livereload": true,
             "sourceMaps": true,
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "smartStep": true,
+            "skipFiles": [
+                "<node_internals>/**/*.js",
+                "${workspaceFolder}/**/node_modules/**/*.js"
+            ]
         }
     ]
 }
