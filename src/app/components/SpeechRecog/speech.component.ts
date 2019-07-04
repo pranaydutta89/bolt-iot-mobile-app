@@ -21,7 +21,7 @@ export class SpeechComponent {
         }
 
         const keywords = await this.speechRecognition.startListening().toPromise();
-
+        this.execute(keywords);
     }
 
     private execute(keywords: string[]) {
