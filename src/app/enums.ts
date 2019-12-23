@@ -23,3 +23,8 @@ export enum PinType {
     analogRead,
     pwm
 }
+
+export enum Environment{
+    development,
+    production
+}

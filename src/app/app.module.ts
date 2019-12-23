@@ -6,7 +6,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { Facebook } from '@ionic-native/facebook/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
@@ -15,8 +15,7 @@ import { AppConfigService } from './services/appConfig.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
-
-
+import { HttpClientModule } from '@angular/common/http';
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
@@ -36,9 +35,11 @@ export function initializeApp(appConfigService: AppConfigService) {
     IonicModule.forRoot(),
     AppRoutingModule,
     PipeModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpClientModule
   ],
   providers: [
+    Facebook,
     StatusBar,
     SplashScreen,
     StorageService,
@@ -47,16 +48,22 @@ export function initializeApp(appConfigService: AppConfigService) {
     NotificationsService,
     AppConfigService,
     {
-      provide: RouteReuseStrategy, useClass: IonicRouteStrategy
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
     },
     {
-      provide: APP_INITIALIZER, useFactory: initializeDevices, deps: [BoltService], multi: true
-    }
-    ,
+      provide: APP_INITIALIZER,
+      useFactory: initializeDevices,
+      deps: [BoltService],
+      multi: true
+    },
     {
-      provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppConfigService], multi: true
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppConfigService],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
