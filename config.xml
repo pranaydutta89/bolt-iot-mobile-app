@@ -3,7 +3,7 @@
     <name>Crawled</name>
     <description>Solving simple problem in our day to day life</description>
     <author email="pranaydutta89@gmail.com">Crawled Team</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

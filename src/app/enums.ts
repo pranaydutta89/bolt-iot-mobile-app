@@ -1,30 +1,28 @@
-
 export enum Products {
-    motionSensor
+  motionSensor
 }
 
 export enum Messages {
-    success = 'Comman Executed Succesfully'
+  success = 'Comman Executed Succesfully'
 }
 
-
 export enum StorageData {
-    boards
+  boards,
+  userData
 }
 
 export enum Boards {
-    hall,
+  hall
 }
-
 
 export enum PinType {
-    digitalRead,
-    digitalWrite,
-    analogRead,
-    pwm
+  digitalRead,
+  digitalWrite,
+  analogRead,
+  pwm
 }
 
-export enum Environment{
-    development,
-    production
+export enum Environment {
+  development,
+  production
 }

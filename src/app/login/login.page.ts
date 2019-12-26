@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '../services/appConfig.service';
+import { StorageService } from '../services/storage.service';
+import { StorageData } from '../enums';
+import { IUser } from '../interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: 'login.page.html',
@@ -11,8 +15,19 @@ export class LoginPage {
   constructor(
     private fb: Facebook,
     private http: HttpClient,
-    private appConfig: AppConfigService
-  ) {}
+    private appConfig: AppConfigService,
+    private storage: StorageService,
+    private router: Router
+  ) {
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    const userData = this.storage.getData<IUser>(StorageData.userData);
+    if (userData) {
+      this.router.navigate([`${userData.id}/home`]);
+    }
+  }
   async loginWithFacebook() {
     const userData: FacebookLoginResponse = await this.fb.login([
       'public_profile',
@@ -22,8 +37,12 @@ export class LoginPage {
       access_token: userData.authResponse.accessToken
     };
     const loginUser = await this.http
-      .post(`${this.appConfig.configs.apiUrl}/public/login`, fbAccessToken)
+      .post<IUser>(
+        `${this.appConfig.configs.apiUrl}/public/login`,
+        fbAccessToken
+      )
       .toPromise();
-    debugger;
+    this.storage.setData(StorageData.userData, loginUser);
+    this.checkLogin();
   }
 }

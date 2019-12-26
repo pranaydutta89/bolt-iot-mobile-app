@@ -11,14 +11,17 @@ import { Devices } from 'bolt-iot-wrapper';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss']
 })
 export class HomePage {
-
   public boards: IBoard[];
   public loadingState: string;
-  constructor(route: ActivatedRoute, private boltService: BoltService,
-    private Storage: StorageService, public toastController: ToastController) {
+  constructor(
+    route: ActivatedRoute,
+    private boltService: BoltService,
+    private Storage: StorageService,
+    public toastController: ToastController
+  ) {
     route.params.subscribe(val => {
       this.init();
       this.isDeviceOnline(this.Storage.getData<IBoard[]>(StorageData.boards));
@@ -30,17 +33,18 @@ export class HomePage {
     this.loadingState = 'noboards';
   }
 
-
   async isDeviceOnline(boards: IBoard[]) {
     this.boltService.doShowLoader = false;
     if (boards && boards.length > 0) {
       this.loadingState = 'boards';
     }
     for (const board of boards) {
-      board.isOnline = await Devices.addAndRead(board.boltProductName, board.apiKey).Utility.isOnline();
+      board.isOnline = await Devices.addAndRead(
+        board.boltProductName,
+        board.apiKey
+      ).Utility.isOnline();
     }
     this.boards = boards;
     this.boltService.doShowLoader = true;
   }
-
 }
