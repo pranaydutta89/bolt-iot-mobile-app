@@ -4,15 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Facebook } from '@ionic-native/facebook/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
 import { BoltService } from './services/bolt.service';
 import { AppConfigService } from './services/appConfig.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,12 +35,8 @@ export function initializeApp(appConfigService: AppConfigService) {
     HttpClientModule
   ],
   providers: [
-    Facebook,
-    StatusBar,
-    SplashScreen,
     StorageService,
     BoltService,
-    LocalNotifications,
     NotificationsService,
     AppConfigService,
     {
