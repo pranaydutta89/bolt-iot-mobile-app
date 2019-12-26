@@ -1,22 +1,28 @@
 <ion-header>
-    <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-            <ion-back-button class="show-back-button"></ion-back-button>
-        </ion-buttons>
-        <ion-title>
-            {{board.name}}
-            <speech></speech>
-        </ion-title>
-    </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button class="show-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ board.name }}
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div *ngFor="let pin of board.pins">
-        <div [ngSwitch]='pin.type'>
-            <digital-read *ngSwitchCase='pinType.digitalRead' [board]='board' [pinDetails]='pin'></digital-read>
-            <digital-write *ngSwitchCase='pinType.digitalWrite' [board]='board' [pinDetails]='pin'></digital-write>
-            <pwm *ngSwitchCase='pinType.pwm' [board]='board' [pinDetails]='pin'></pwm>
-        </div>
+  <div *ngFor="let pin of board.pins">
+    <div [ngSwitch]="pin.type">
+      <digital-read
+        *ngSwitchCase="pinType.digitalRead"
+        [board]="board"
+        [pinDetails]="pin"
+      ></digital-read>
+      <digital-write
+        *ngSwitchCase="pinType.digitalWrite"
+        [board]="board"
+        [pinDetails]="pin"
+      ></digital-write>
+      <pwm *ngSwitchCase="pinType.pwm" [board]="board" [pinDetails]="pin"></pwm>
     </div>
-
+  </div>
 </ion-content>
