@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from '../services/appConfig.service';
-import { StorageService } from '../services/storage.service';
-import { StorageData } from '../enums';
-import { IUserLoginData } from '../interfaces/interface';
+import { AppConfigService } from '../../services/appConfig.service';
+import { StorageService } from '../../services/storage.service';
+import { StorageData } from '../../enums';
+import { IUserLoginData } from '../../interfaces/interface';
 import { Router } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
@@ -28,7 +28,7 @@ export class LoginPage {
       StorageData.userData
     );
     if (userData) {
-      this.router.navigate([`${userData.id}/home`]);
+      this.router.navigate([`dashboard`]);
     }
   }
   async loginWithFacebook() {

@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { HomePage } from './home.page';
+import { LoginPage } from './login/login.page';
 import { ComponentsModule } from '../components/components.module';
+import { DashBoard } from './dashboard/dashboard.page';
+import { PipeModule } from '../pipes/pipe.module';
 
 @NgModule({
   imports: [
@@ -12,13 +14,18 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     IonicModule,
     ComponentsModule,
+    PipeModule,
     RouterModule.forChild([
       {
-        path: '',
-        component: HomePage
+        path: 'login',
+        component: LoginPage
+      },
+      {
+        path: 'dashboard',
+        component: DashBoard
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [LoginPage, DashBoard]
 })
-export class HomePageModule {}
+export class PagesModule {}

@@ -3,14 +3,15 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { StorageService } from './storage.service';
 import { IUserLoginData } from '../interfaces/interface';
 import { StorageData } from '../enums';
-import { map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
@@ -19,22 +20,30 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(
     private storage: StorageService,
     public loadingController: LoadingController
-  ) {}
+  ) {
+    this.init();
+  }
+
+  async init() {
+    const load = await this.loadingController.create({
+      message: 'Loading...'
+    });
+    this.loading = load;
+  }
 
   async toggleLoader(show = true) {
-    if (!this.loading) {
-      this.loading = await this.loadingController.create({
-        message: 'Loading...'
-      });
-    }
-    if (show) {
-      await this.loading.present();
-      this.loaderCount += 1;
-    } else {
-      this.loaderCount -= 1;
-      if (this.loaderCount <= 0) {
-        await this.loading.dismiss();
-        this.loaderCount = 0;
+    if (this.loading) {
+      if (show) {
+        if (this.loaderCount === 0) {
+          this.loaderCount += 1;
+          await this.loading.present();
+        }
+      } else {
+        this.loaderCount -= 1;
+        if (this.loaderCount <= 0) {
+          await this.loading.dismiss();
+          this.loaderCount = 0;
+        }
       }
     }
   }
@@ -60,11 +69,15 @@ export class TokenInterceptorService implements HttpInterceptor {
     return next.handle(authReq).pipe(
       // We use the map operator to change the data from the response
 
-      map(resp => {
-        if (resp instanceof HttpResponse) {
+      map(evt => {
+        if (evt instanceof HttpResponse) {
           this.toggleLoader(false);
-          return resp;
+          return evt;
         }
+      }),
+      catchError((err: any) => {
+        this.toggleLoader(false);
+        return of(err);
       })
     );
   }

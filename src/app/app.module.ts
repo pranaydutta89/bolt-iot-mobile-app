@@ -17,6 +17,7 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 import { TokenInterceptorService } from './services/httpInterceptor.service';
+import { PagesModule } from './pages/pages.module';
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
@@ -48,6 +49,7 @@ export function provideConfig() {
     AppRoutingModule,
     PipeModule,
     ComponentsModule,
+    PagesModule,
     HttpClientModule,
     SocialLoginModule
   ],
