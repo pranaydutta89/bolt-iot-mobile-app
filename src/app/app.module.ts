@@ -9,14 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { StorageService } from './services/storage.service';
 import { BoltService } from './services/bolt.service';
 import { AppConfigService } from './services/appConfig.service';
-import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   SocialLoginModule,
   AuthServiceConfig,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import { TokenInterceptorService } from './services/httpInterceptor.service';
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
@@ -54,8 +54,12 @@ export function provideConfig() {
   providers: [
     StorageService,
     BoltService,
-    NotificationsService,
     AppConfigService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

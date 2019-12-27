@@ -13,7 +13,6 @@ import {
 } from 'bolt-iot-wrapper/dist/Enums';
 import { LoadingController } from '@ionic/angular';
 import { ToastService } from './toast.service';
-import { NotificationsService } from './notifications.service';
 import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 
 @Injectable({
@@ -26,7 +25,6 @@ export class BoltService {
 
   constructor(
     private storage: StorageService,
-    private notificationService: NotificationsService,
     private loadingController: LoadingController,
     private toastService: ToastService
   ) {
@@ -71,14 +69,14 @@ export class BoltService {
   }
 
   public async init() {
-    const boards = this.storage.getData<IBoard[]>(StorageData.boards);
-    if (boards) {
-      boards.forEach(r => {
-        if (!Devices.isDeviceAdded(r.boltProductName)) {
-          Devices.add(r.boltProductName, r.apiKey);
-        }
-      });
-    }
+    // const boards = this.storage.getData<IBoard[]>(StorageData.boards);
+    // if (boards) {
+    //   boards.forEach(r => {
+    //     if (!Devices.isDeviceAdded(r.boltProductName)) {
+    //       Devices.add(r.boltProductName, r.apiKey);
+    //     }
+    //   });
+    // }
   }
 
   public async pwm(board: IBoard, pin: IPin) {

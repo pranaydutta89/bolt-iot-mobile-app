@@ -5,11 +5,9 @@ import { StorageData } from '../enums';
   providedIn: 'root'
 })
 export class StorageService {
-
   constructor() {
     this.initialize();
   }
-
 
   initialize() {
     if (!this.getData(StorageData.boards)) {
@@ -22,13 +20,11 @@ export class StorageService {
     if (data) {
       return JSON.parse(localStorage.getItem(type.toString())) as T;
     } else {
-      return null;
+      return {} as T;
     }
   }
 
   setData(type: StorageData, data: any) {
     localStorage.setItem(type.toString(), JSON.stringify(data));
   }
-
-
 }
