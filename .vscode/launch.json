@@ -114,7 +114,8 @@
       "skipFiles": [
         "<node_internals>/**/*.js",
         "${workspaceFolder}/**/node_modules/**/*.js"
-      ]
+      ],
+      "runArguments": ["--ssl"]
     },
     {
       "name": "Simulate Android in browser",

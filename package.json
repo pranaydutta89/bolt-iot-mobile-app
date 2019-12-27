@@ -24,6 +24,7 @@
     "@angular/router": "^7.2.2",
     "@ionic-native/core": "^5.0.0",
     "@ionic/angular": "^4.1.0",
+    "angularx-social-login": "^2.2.1",
     "bolt-iot-wrapper": "1.2.0",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "^2.0.3",

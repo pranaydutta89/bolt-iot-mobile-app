@@ -5,6 +5,8 @@ import { StorageService } from '../services/storage.service';
 import { StorageData } from '../enums';
 import { IUser } from '../interface';
 import { Router } from '@angular/router';
+import { AuthService } from 'angularx-social-login';
+import { FacebookLoginProvider } from 'angularx-social-login';
 @Component({
   selector: 'app-login',
   templateUrl: 'login.page.html',
@@ -15,7 +17,8 @@ export class LoginPage {
     private http: HttpClient,
     private appConfig: AppConfigService,
     private storage: StorageService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.checkLogin();
   }
@@ -27,20 +30,19 @@ export class LoginPage {
     }
   }
   async loginWithFacebook() {
-    // const userData: FacebookLoginResponse = await this.fb.login([
-    //   'public_profile',
-    //   'email'
-    // ]);
-    // const fbAccessToken = {
-    //   access_token: userData.authResponse.accessToken
-    // };
-    // const loginUser = await this.http
-    //   .post<IUser>(
-    //     `${this.appConfig.configs.apiUrl}/public/login`,
-    //     fbAccessToken
-    //   )
-    //   .toPromise();
-    // this.storage.setData(StorageData.userData, loginUser);
-    // this.checkLogin();
+    const userData = await this.authService.signIn(
+      FacebookLoginProvider.PROVIDER_ID
+    );
+    const fbAccessToken = {
+      access_token: userData.authToken
+    };
+    const loginUser = await this.http
+      .post<IUser>(
+        `${this.appConfig.configs.apiUrl}/public/login`,
+        fbAccessToken
+      )
+      .toPromise();
+    this.storage.setData(StorageData.userData, loginUser);
+    this.checkLogin();
   }
 }

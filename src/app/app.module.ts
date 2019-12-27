@@ -12,6 +12,11 @@ import { AppConfigService } from './services/appConfig.service';
 import { NotificationsService } from './services/notifications.service';
 import { PipeModule } from './pipes/pipe.module';
 import { HttpClientModule } from '@angular/common/http';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
@@ -23,6 +28,17 @@ export function initializeApp(appConfigService: AppConfigService) {
   };
 }
 
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('1381508108690230')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,13 +48,18 @@ export function initializeApp(appConfigService: AppConfigService) {
     AppRoutingModule,
     PipeModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
   providers: [
     StorageService,
     BoltService,
     NotificationsService,
     AppConfigService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
