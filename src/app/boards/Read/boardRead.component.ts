@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StorageData, PinType, Messages } from '../../enums';
 import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
-import { IDeviceInstance, IBoard, IPin } from '../../interface';
+import { IDeviceInstance, IBoard, IPin } from '../../interfaces/interface';
 import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 import { ToastService } from 'src/app/services/toast.service';
 import { Devices } from 'bolt-iot-wrapper';

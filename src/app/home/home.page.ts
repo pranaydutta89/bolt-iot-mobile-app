@@ -1,4 +1,4 @@
-import { IBoard } from '../interface';
+import { IBoard } from '../interfaces/interface';
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { StorageData } from '../enums';
@@ -7,6 +7,7 @@ import { StorageService } from '../services/storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { BoltService } from '../services/bolt.service';
 import { Devices } from 'bolt-iot-wrapper';
+import { IHome } from '../interfaces/mainEntities';
 
 @Component({
   selector: 'app-home',
@@ -14,37 +15,17 @@ import { Devices } from 'bolt-iot-wrapper';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  public boards: IBoard[];
+  public userId = this.route.snapshot.paramMap.get('userId');
+  public homes: IHome[];
   public loadingState: string;
   constructor(
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
     private boltService: BoltService,
     private Storage: StorageService,
     public toastController: ToastController
   ) {
-    route.params.subscribe(val => {
-      this.init();
-      this.isDeviceOnline(this.Storage.getData<IBoard[]>(StorageData.boards));
-    });
+    this.init();
   }
 
-  init() {
-    this.boards = [];
-    this.loadingState = 'noboards';
-  }
-
-  async isDeviceOnline(boards: IBoard[]) {
-    this.boltService.doShowLoader = false;
-    if (boards && boards.length > 0) {
-      this.loadingState = 'boards';
-    }
-    for (const board of boards) {
-      board.isOnline = await Devices.addAndRead(
-        board.boltProductName,
-        board.apiKey
-      ).Utility.isOnline();
-    }
-    this.boards = boards;
-    this.boltService.doShowLoader = true;
-  }
+  init() {}
 }

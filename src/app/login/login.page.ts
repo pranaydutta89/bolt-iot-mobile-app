@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '../services/appConfig.service';
 import { StorageService } from '../services/storage.service';
 import { StorageData } from '../enums';
-import { IUser } from '../interface';
+import { IUserLoginData } from '../interfaces/interface';
 import { Router } from '@angular/router';
 import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
@@ -24,7 +24,9 @@ export class LoginPage {
   }
 
   checkLogin() {
-    const userData = this.storage.getData<IUser>(StorageData.userData);
+    const { userData } = this.storage.getData<IUserLoginData>(
+      StorageData.userData
+    );
     if (userData) {
       this.router.navigate([`${userData.id}/home`]);
     }
@@ -37,7 +39,7 @@ export class LoginPage {
       access_token: userData.authToken
     };
     const loginUser = await this.http
-      .post<IUser>(
+      .post<IUserLoginData>(
         `${this.appConfig.configs.apiUrl}/public/login`,
         fbAccessToken
       )

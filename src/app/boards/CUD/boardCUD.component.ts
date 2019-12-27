@@ -1,7 +1,7 @@
 import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IBoard, IPin } from 'src/app/interface';
+import { IBoard, IPin } from 'src/app/interfaces/interface';
 import { StorageData, PinType } from 'src/app/enums';
 import { v4 } from 'uuid';
 import { BoltService } from 'src/app/services/bolt.service';

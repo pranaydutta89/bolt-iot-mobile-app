@@ -1,6 +1,6 @@
-import { IBoard } from './../../../interface';
+import { IBoard } from '../../../interfaces/interface';
 import { Component, Input } from '@angular/core';
-import { IPin } from 'src/app/interface';
+import { IPin } from 'src/app/interfaces/interface';
 import { STATE } from 'bolt-iot-wrapper/dist/Enums';
 import { BoltService } from 'src/app/services/bolt.service';
 import { ToastService } from 'src/app/services/toast.service';

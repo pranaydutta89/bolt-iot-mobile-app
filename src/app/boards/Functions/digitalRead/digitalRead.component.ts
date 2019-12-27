@@ -2,7 +2,7 @@ import { ModalController } from '@ionic/angular';
 import { IDigitalReturn } from 'bolt-iot-wrapper/dist/Interfaces';
 import { BoltService } from 'src/app/services/bolt.service';
 import { Component, Input } from '@angular/core';
-import { IPin, IBoard } from 'src/app/interface';
+import { IPin, IBoard } from 'src/app/interfaces/interface';
 import { ToastService } from 'src/app/services/toast.service';
 import { Messages } from 'src/app/enums';
 import { STATE } from 'bolt-iot-wrapper/dist/Enums';

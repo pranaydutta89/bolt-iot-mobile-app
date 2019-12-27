@@ -1,6 +1,6 @@
 import { BoltService } from 'src/app/services/bolt.service';
 import { Component, Input } from '@angular/core';
-import { IPin, IBoard } from 'src/app/interface';
+import { IPin, IBoard } from 'src/app/interfaces/interface';
 import { Devices } from 'bolt-iot-wrapper';
 import { ModalController } from '@ionic/angular';
 

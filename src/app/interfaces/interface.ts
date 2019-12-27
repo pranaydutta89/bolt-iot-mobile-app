@@ -1,6 +1,7 @@
-import { Products, Boards, PinType } from './enums';
+import { Products, Boards, PinType } from '../enums';
 import { Analog, Digital, Utility, Enums } from 'bolt-iot-wrapper';
 import { PINS, STATE } from 'bolt-iot-wrapper/dist/Enums';
+import { IUser } from './mainEntities';
 
 export interface IDevice {
   productName: string;
@@ -36,10 +37,9 @@ export interface IPin {
   value?: STATE | number;
 }
 
-export interface IUser{
-    id: string,
-    name: string,
-    email:string
+export interface IUserLoginData {
+  jwtToken: string;
+  userData: IUser;
 }
 
 export interface IAppConfig {
