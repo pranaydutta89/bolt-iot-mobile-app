@@ -9,8 +9,8 @@ import { AuthService } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
 @Component({
   selector: 'app-login',
-  templateUrl: 'login.page.html',
-  styleUrls: ['login.page.scss']
+  templateUrl: 'login.html',
+  styleUrls: ['login.scss']
 })
 export class LoginPage {
   constructor(

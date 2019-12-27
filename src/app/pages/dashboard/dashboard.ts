@@ -13,8 +13,8 @@ import { AppConfigService } from '../../services/appConfig.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'dashboard.page.html',
-  styleUrls: ['dashboard.page.scss']
+  templateUrl: 'dashboard.html',
+  styleUrls: ['dashboard.scss']
 })
 export class DashBoard {
   public homes: IHome[];
