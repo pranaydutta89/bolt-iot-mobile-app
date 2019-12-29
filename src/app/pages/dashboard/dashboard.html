@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Crawled
+      DashBoard
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -27,38 +27,15 @@
     <div *ngSwitchCase="'homes'">
       <div *ngIf="homes.length !==0">
         <div *ngFor="let home of homes">
-          <ion-card>
+          <ion-card (click)="openHomeActions(home)">
             <ion-card-header>
+              <ion-card-subtitle>Home Name</ion-card-subtitle>
               <ion-card-title>{{home.name | uppercase}}</ion-card-title>
             </ion-card-header>
             <ion-card-content
               >Created {{home.createdAt | fromNow}} <br />
               Updated {{home.updatedAt | fromNow}}
             </ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col *ngIf="home.isAdmin">
-                  <ion-button
-                    color="light"
-                    [routerDirection]="'forward'"
-                    [routerLink]="'/home/'+home.id"
-                    expand="full"
-                  >
-                    Edit</ion-button
-                  >
-                </ion-col>
-                <ion-col>
-                  <!-- <ion-button
-                    color="secondary"
-                    [routerDirection]="'forward'"
-                    [routerLink]="'/boards/read/'+board.id"
-                    expand="full"
-                  >
-                    Read</ion-button
-                  > -->
-                </ion-col>
-              </ion-row>
-            </ion-grid>
           </ion-card>
         </div>
       </div>

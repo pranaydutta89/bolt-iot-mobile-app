@@ -20,7 +20,7 @@
           formControlName="roomName"
         ></ion-input>
       </ion-item>
-      <ion-button type="submit" [disabled]="newRoomForm.invalid"
+      <ion-button type="submit" [disabled]="newRoomForm.invalid" expand="full"
         >Submit</ion-button
       >
     </form>
@@ -34,7 +34,10 @@
         [controlName]="'roomName'"
       ></app-editable-input>
 
-      <ion-button type="submit" [disabled]="existingRoomForm.invalid"
+      <ion-button
+        type="submit"
+        [disabled]="existingRoomForm.invalid"
+        expand="full"
         >Submit</ion-button
       >
     </form>

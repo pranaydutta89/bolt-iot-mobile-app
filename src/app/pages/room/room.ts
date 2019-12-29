@@ -17,6 +17,7 @@ import { IRoom, IBolt, IAppliance } from 'src/app/interfaces/mainEntities';
 })
 export default class RoomPage {
   public roomId = this.route.snapshot.paramMap.get('roomId');
+  public homeId = this.route.snapshot.paramMap.get('homeId');
 
   public newRoomForm = this.formBuilder.group({
     roomName: ['', [Validators.required]]
@@ -59,9 +60,12 @@ export default class RoomPage {
 
   async addNewRoom() {
     const data = await this.http
-      .post<IRoom>(`${this.appConfig.configs.apiUrl}/private/room`, this.room)
+      .post<IRoom>(
+        `${this.appConfig.configs.apiUrl}/private/home/${this.homeId}/room`,
+        this.room
+      )
       .toPromise();
-    this.router.navigate([`room/${data.id}`]);
+    this.router.navigate([`home/${this.homeId}/room/${data.id}`]);
   }
 
   async editExistingRoom() {

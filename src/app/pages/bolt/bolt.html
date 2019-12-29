@@ -28,7 +28,7 @@
           formControlName="apiKey"
         ></ion-input>
       </ion-item>
-      <ion-button type="submit" [disabled]="newBoltForm.invalid"
+      <ion-button type="submit" [disabled]="newBoltForm.invalid" expand="full"
         >Submit</ion-button
       >
     </form>
@@ -49,7 +49,10 @@
       >
       </app-editable-input>
 
-      <ion-button type="submit" [disabled]="existingBoltForm.invalid"
+      <ion-button
+        type="submit"
+        [disabled]="existingBoltForm.invalid"
+        expand="full"
         >Submit</ion-button
       >
     </form>

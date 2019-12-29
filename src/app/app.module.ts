@@ -18,6 +18,7 @@ import {
 } from 'angularx-social-login';
 import { TokenInterceptorService } from './services/httpInterceptor.service';
 import { PagesModule } from './pages/pages.module';
+import AlertService from './services/alert.service';
 export function initializeDevices(boltService: BoltService) {
   return (): Promise<any> => {
     return boltService.init();
@@ -54,6 +55,7 @@ export function provideConfig() {
     SocialLoginModule
   ],
   providers: [
+    AlertService,
     StorageService,
     BoltService,
     AppConfigService,

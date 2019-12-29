@@ -9,14 +9,9 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
+      title: 'DashBoard',
+      url: '/dashboard',
       icon: 'home'
-    },
-    {
-      title: 'Add Board',
-      url: '/boards/cud/new',
-      icon: 'clipboard'
     }
   ];
 

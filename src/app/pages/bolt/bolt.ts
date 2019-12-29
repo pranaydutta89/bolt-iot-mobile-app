@@ -20,6 +20,7 @@ const formValdiations = {
   styleUrls: ['bolt.scss']
 })
 export default class BoltPage {
+  public homeId = this.route.snapshot.paramMap.get('homeId');
   public boltId = this.route.snapshot.paramMap.get('boltId');
 
   public newBoltForm = this.formBuilder.group(formValdiations);
@@ -48,9 +49,12 @@ export default class BoltPage {
 
   async addNewBolt() {
     const data = await this.http
-      .post<IBolt>(`${this.appConfig.configs.apiUrl}/private/bolt`, this.bolt)
+      .post<IBolt>(
+        `${this.appConfig.configs.apiUrl}/private/home/${this.homeId}/bolt`,
+        this.bolt
+      )
       .toPromise();
-    this.router.navigate([`bolt/${data.id}`]);
+    this.router.navigate([`home/${this.homeId}/bolt/${data.id}`]);
   }
 
   async editExistingBolt() {

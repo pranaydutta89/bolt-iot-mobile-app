@@ -29,11 +29,11 @@ import BoltPage from './bolt/bolt';
         component: DashBoard
       },
       {
-        path: 'room/:roomId',
+        path: 'home/:homeId/room/:roomId',
         component: RoomPage
       },
       {
-        path: 'bolt/:boltId',
+        path: 'home/:homeId/bolt/:boltId',
         component: BoltPage
       },
       {
