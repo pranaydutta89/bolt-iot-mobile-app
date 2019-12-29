@@ -4,11 +4,70 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Crawled
+      {{roomId =='new' ? 'Add':'Edit'}} Room
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  room
+  <div *ngIf="roomId ==='new'">
+    <form [formGroup]="newRoomForm" (ngSubmit)="addNewRoom()">
+      <ion-item>
+        <ion-label position="floating">Enter Room Name</ion-label>
+        <ion-input
+          clearInput
+          [(ngModel)]="room.name"
+          formControlName="roomName"
+        ></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="newRoomForm.invalid"
+        >Submit</ion-button
+      >
+    </form>
+  </div>
+  <div *ngIf="roomId !=='new'">
+    <form [formGroup]="existingRoomForm" (ngSubmit)="editExistingRoom()">
+      <app-editable-input
+        [formName]="existingRoomForm"
+        [(val)]="room.name"
+        [label]="'Room Name'"
+        [controlName]="'roomName'"
+      ></app-editable-input>
+
+      <ion-button type="submit" [disabled]="existingRoomForm.invalid"
+        >Submit</ion-button
+      >
+    </form>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Appliances</ion-label>
+      </ion-list-header>
+      <div *ngFor=" let appliance of appliances">
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>{{appliance.name}}</ion-label>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option
+              [routerDirection]="'forward'"
+              [routerLink]="'/appliance/'+appliance.id"
+              expand="full"
+              color="warning"
+              >Edit</ion-item-option
+            >
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
+    </ion-list>
+    <ion-button
+      color="light"
+      [routerDirection]="'forward'"
+      [routerLink]="'/room/new'"
+      expand="full"
+    >
+      Add Appliance</ion-button
+    >
+  </div>
 </ion-content>

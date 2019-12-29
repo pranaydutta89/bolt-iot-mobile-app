@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { LoginPage } from './login/login';
@@ -9,6 +9,7 @@ import { DashBoard } from './dashboard/dashboard';
 import { PipeModule } from '../pipes/pipe.module';
 import RoomPage from './room/room';
 import HomePage from './home/home';
+import BoltPage from './bolt/bolt';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import HomePage from './home/home';
     IonicModule,
     ComponentsModule,
     PipeModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: 'login',
@@ -27,8 +29,12 @@ import HomePage from './home/home';
         component: DashBoard
       },
       {
-        path: 'home/:homeId/room/:roomId',
+        path: 'room/:roomId',
         component: RoomPage
+      },
+      {
+        path: 'bolt/:boltId',
+        component: BoltPage
       },
       {
         path: 'home/:homeId',
@@ -36,6 +42,6 @@ import HomePage from './home/home';
       }
     ])
   ],
-  declarations: [LoginPage, DashBoard, RoomPage, HomePage]
+  declarations: [LoginPage, DashBoard, RoomPage, HomePage, BoltPage]
 })
 export class PagesModule {}

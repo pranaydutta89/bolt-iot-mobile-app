@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{boltId =='new' ? 'Add':'Edit'}} Bolt
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="boltId ==='new'">
+    <form [formGroup]="newBoltForm" (ngSubmit)="addNewBolt()">
+      <ion-item>
+        <ion-label position="floating">Enter Bolt Product Name</ion-label>
+        <ion-input
+          clearInput
+          [(ngModel)]="bolt.productName"
+          formControlName="boltProductName"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Enter Bolt Api Key</ion-label>
+        <ion-input
+          clearInput
+          [(ngModel)]="bolt.apiKey"
+          formControlName="apiKey"
+        ></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="newBoltForm.invalid"
+        >Submit</ion-button
+      >
+    </form>
+  </div>
+  <div *ngIf="boltId !=='new'">
+    <form [formGroup]="existingBoltForm" (ngSubmit)="editExistingBolt()">
+      <app-editable-input
+        [formName]="existingBoltForm"
+        [(val)]="bolt.productName"
+        [label]="'Bolt Product Name'"
+        [controlName]="'boltProductName'"
+      ></app-editable-input>
+      <app-editable-input
+        [formName]="existingBoltForm"
+        [(val)]="bolt.apiKey"
+        [label]="'Bolt Api Name'"
+        [controlName]="'apiKey'"
+      >
+      </app-editable-input>
+
+      <ion-button type="submit" [disabled]="existingBoltForm.invalid"
+        >Submit</ion-button
+      >
+    </form>
+  </div>
+</ion-content>

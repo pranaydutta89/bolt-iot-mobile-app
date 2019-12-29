@@ -1,0 +1,20 @@
+<div [formGroup]="formName">
+  <div *ngIf="!editMode">
+    <ion-item>
+      <ion-label position="fixed">{{label}}</ion-label>
+      <ion-label>{{val}}</ion-label>
+    </ion-item>
+    <ion-icon name="create" (click)="editMode=true"></ion-icon>
+  </div>
+  <div *ngIf="editMode">
+    <ion-item>
+      <ion-label position="floating">{{label}}</ion-label>
+      <ion-input
+        clearInput
+        [(ngModel)]="val"
+        (ngModelChange)="valChange.emit($event)"
+        [formControlName]="controlName"
+      ></ion-input>
+    </ion-item>
+  </div>
+</div>

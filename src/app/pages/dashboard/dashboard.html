@@ -37,15 +37,15 @@
             </ion-card-content>
             <ion-grid>
               <ion-row>
-                <ion-col>
-                  <!-- <ion-button
+                <ion-col *ngIf="home.isAdmin">
+                  <ion-button
                     color="light"
                     [routerDirection]="'forward'"
-                    [routerLink]="'/boards/cud/'+board.id"
+                    [routerLink]="'/home/'+home.id"
                     expand="full"
                   >
                     Edit</ion-button
-                  > -->
+                  >
                 </ion-col>
                 <ion-col>
                   <!-- <ion-button
