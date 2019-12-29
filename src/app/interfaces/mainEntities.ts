@@ -21,6 +21,14 @@ export interface IBolt extends ICommon {
   apiKey: string;
 }
 
+export interface IHomeUser extends ICommon {
+  userId: string;
+  homeId: string;
+  isAdmin: boolean;
+  home: IHome;
+  user?: IUser;
+}
+
 export interface IAppliance extends ICommon {
   name: string;
   currentState: string;

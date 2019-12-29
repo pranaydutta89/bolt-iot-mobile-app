@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Add Member Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="memberForm" (ngSubmit)="addNewMember()">
+    <ion-item>
+      <ion-label position="floating">Enter Member Name</ion-label>
+      <ion-input
+        clearInput
+        [(ngModel)]="memberName"
+        formControlName="memberName"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Enter Member Email</ion-label>
+      <ion-input
+        clearInput
+        [(ngModel)]="memberEmail"
+        formControlName="memberEmail"
+      ></ion-input>
+    </ion-item>
+    <ion-button type="submit" [disabled]="memberForm.invalid" expand="full"
+      >Save</ion-button
+    >
+  </form>
+</ion-content>

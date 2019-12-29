@@ -10,6 +10,7 @@ import { PipeModule } from '../pipes/pipe.module';
 import RoomPage from './room/room';
 import HomePage from './home/home';
 import BoltPage from './bolt/bolt';
+import { AddMemberPage } from './home/modals/addMembers/addMembers';
 
 @NgModule({
   imports: [
@@ -42,6 +43,14 @@ import BoltPage from './bolt/bolt';
       }
     ])
   ],
-  declarations: [LoginPage, DashBoard, RoomPage, HomePage, BoltPage]
+  entryComponents: [AddMemberPage],
+  declarations: [
+    LoginPage,
+    DashBoard,
+    RoomPage,
+    HomePage,
+    BoltPage,
+    AddMemberPage
+  ]
 })
 export class PagesModule {}
